@@ -1,0 +1,28 @@
+*.img filter=lfs diff=lfs merge=lfs
+*.img.gz filter=lfs diff=lfs merge=lfs 
+*.gz filter=lfs diff=lfs merge=lfs
+*.hmi filter=lfs diff=lfs merge=lfs -text
+*.HMI filter=lfs diff=lfs merge=lfs -text
+*.step filter=lfs diff=lfs merge=lfs -text
+*.stl filter=lfs diff=lfs merge=lfs -text
+*.3mf filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs 
+*.jpeg filter=lfs diff=lfs merge=lfs 
+*.png filter=lfs diff=lfs merge=lfs
+*.pdf filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs
+*.f3z filter=lfs diff=lfs merge=lfs
+*.tft filter=lfs diff=lfs merge=lfs
+*.sch diff=lfs merge=lfs  -text 
+*.kicad_pcb diff=lfs merge=lfs -text 
+*fp-info-cache diff=lfs merge=lfs -text 
+*fp-lib-table diff=lfs merge=lfs -text 
+*sym-lib-table diff=lfs merge=lfs -text
+*.wrl diff=lfs merge=lfs  -text
+*.dcm diff=lfs merge=lfs -text
+*.kicad_wks diff=lfs merge=lfs -text
+*.kicad_mod diff=lfs merge=lfs -text
+*.pro diff=lfs merge=lfs -text
+*.lib diff=lfs merge=lfs -text
+*.FCStd diff=lfs merge=lfs
+
