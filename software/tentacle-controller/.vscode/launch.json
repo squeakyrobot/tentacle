@@ -12,20 +12,23 @@
       "type": "cortex-debug",
       "servertype": "openocd",
       "gdbPath": "gdb-multiarch",
-      "serverArgs": [
-        
-      ],
+      "serverArgs": [],
       "device": "RP2040",
+      // "showDevDebugOutput": "raw",
+      "liveWatch": {
+        "enabled": true,
+        "samplesPerSecond": 2
+      },
       "configFiles": [
-        "interface/picoprobe.cfg",
+        "interface/cmsis-dap.cfg",
         "target/rp2040.cfg"
-        ],
+      ],
       "svdFile": "${env:PICO_SDK_PATH}/src/rp2040/hardware_regs/rp2040.svd",
-      "runToEntryPoint": "main",
+      // "runToEntryPoint": "main",
       // Give restart the same functionality as runToEntryPoint - main
       "postRestartCommands": [
-          "break main",
-          "continue"
+        "break main",
+        "continue"
       ]
     }
   ]
