@@ -26,9 +26,16 @@ project(tentacle-controller C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
+
+
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(tentacle-controller src/tentacle-controller.cpp )
+add_executable(tentacle-controller src/main.cpp )
+
+target_sources(tentacle-controller PRIVATE 
+  src/motor-driver/motor-driver.cpp 
+  src/motor-driver/timer-motor-driver.cpp)
+
 
 pico_set_program_name(tentacle-controller "tentacle-controller")
 pico_set_program_version(tentacle-controller "0.1")
@@ -43,7 +50,15 @@ target_link_libraries(tentacle-controller
 # Add the standard include files to the build
 target_include_directories(tentacle-controller PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}
-  ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
+  ${CMAKE_CURRENT_LIST_DIR}/src 
+  ${CMAKE_CURRENT_LIST_DIR}/src/motor-driver
+  # ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
+
+)
+
+target_include_directories(tentacle-controller PUBLIC
+  src
+
 )
 
 # Add any user requested libraries
