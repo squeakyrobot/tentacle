@@ -5,12 +5,10 @@
 StepperDriver::StepperDriver(StepperDriverConfig config) {
     this->config = config;
     this->stepsPerRev = config.stepsPerRevolution * config.microStepMultiplier;
-    this->stepsPerDegree = this->stepsPerRev / (double)360;
+    this->stepsPerDegree = this->stepsPerRev / (float)360;
 
     float rps = this->config.maxRPM / 60;
     this->maxStepsPerSecond = this->stepsPerRev * rps;
-
-    printf("Max SPS: %f\n", this->maxStepsPerSecond);
 };
 
 uint32_t StepperDriver::calculateRotateTime_ms(uint8_t speed, uint32_t rotationDegrees) {

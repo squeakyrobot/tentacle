@@ -12,6 +12,7 @@ const StepperDriverConfig TMC2209_28BYJ48_64 = {
     stepPin : 0,
     stepsPerRevolution : 2052,
     microStepMultiplier : 8,
+    invertDirection : true,
     maxRPM : 25
 };
 
@@ -22,8 +23,9 @@ const StepperDriverConfig DRV8825_28BYJ48_64 = {
     directionPin : 0,
     stepPin : 0,
     stepsPerRevolution : 2052,
-    microStepMultiplier : 0,
-    maxRPM : 30
+    microStepMultiplier : 1,
+    invertDirection : false,
+    maxRPM : 25
 };
 
 /**
@@ -34,7 +36,8 @@ const StepperDriverConfig TMC2209_NEMA8 = {
     stepPin : 0,
     stepsPerRevolution : 200,
     microStepMultiplier : 8,
-    maxRPM : 300
+    invertDirection : true,
+    maxRPM : 150
 };
 
 StepperDriverConfig createMotorConfig(StepperDriverConfig config, uint8_t stepPin, uint8_t directionPin);

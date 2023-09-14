@@ -7,7 +7,8 @@ struct StepperDriverConfig {
     uint8_t directionPin;
     uint8_t stepPin;
     uint16_t stepsPerRevolution;
-    uint16_t microStepMultiplier = 0;
+    uint16_t microStepMultiplier = 1;
+    bool invertDirection = false;
     float maxRPM;
 };
 
@@ -17,8 +18,8 @@ enum MotorStatus {
 };
 
 enum MotorDirection {
-    MotorDirCCW = 0,
-    MotorDirCW = 1,
+    MotorDirCW = 0,
+    MotorDirCCW = 1,
 };
 
 class StepperDriver {

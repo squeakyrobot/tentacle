@@ -5,7 +5,7 @@ TimerStepperDriver::TimerStepperDriver(StepperDriverConfig config) : StepperDriv
     gpio_init(config.directionPin);
     gpio_set_dir(config.stepPin, GPIO_OUT);
     gpio_set_dir(config.directionPin, GPIO_OUT);
-    gpio_put(config.directionPin, MotorDirCW);
+    gpio_put(config.directionPin, (this->config.invertDirection) ? !MotorDirCW : MotorDirCW);
 };
 
 TimerStepperDriver::~TimerStepperDriver() {
@@ -15,7 +15,7 @@ TimerStepperDriver::~TimerStepperDriver() {
 bool TimerStepperDriver::rotateSteps(uint8_t speed, uint32_t steps, MotorDirection direction) {
     if (this->direction != direction) {
         this->direction = direction;
-        gpio_put(this->config.directionPin, direction);
+        gpio_put(this->config.directionPin, (this->config.invertDirection) ? !direction : direction);
     }
 
     if (this->timer.alarm_id > 0) {

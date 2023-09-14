@@ -36,9 +36,11 @@ target_sources(tentacle-controller PRIVATE
   src/util.cpp
   src/motor-driver/stepper-driver.cpp 
   src/motor-driver/timer-stepper-driver.cpp
+  # src/motor-driver/pio-stepper-driver.cpp
   src/motor-driver/driver-configuration.cpp
   )
 
+  pico_generate_pio_header(tentacle-controller ${CMAKE_CURRENT_LIST_DIR}/src/motor-driver/stepper.pio)
 
 pico_set_program_name(tentacle-controller "tentacle-controller")
 pico_set_program_version(tentacle-controller "0.1")
@@ -47,8 +49,7 @@ pico_enable_stdio_uart(tentacle-controller 1)
 pico_enable_stdio_usb(tentacle-controller 0)
 
 # Add the standard library to the build
-target_link_libraries(tentacle-controller
-        pico_stdlib)
+target_link_libraries(tentacle-controller pico_stdlib)
 
 # Add the standard include files to the build
 target_include_directories(tentacle-controller PRIVATE

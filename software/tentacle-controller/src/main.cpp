@@ -28,31 +28,30 @@ int main() {
     gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_put(LED_PIN, 1);
 
-    StepperDriver *driver = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_64, 17, 16));
+    StepperDriver *driver1 = new TimerStepperDriver(createMotorConfig(DRV8825_28BYJ48_64, 17, 16));
+    StepperDriver *driver2 = new TimerStepperDriver(createMotorConfig(TMC2209_NEMA8, 19, 18));
 
-    puts("First Rotation");
-    driver->rotateDegrees(255, 1440);
-    sleep_us(driver->calculateRotateTime_us(255, 1440));
+    puts("Motor 1");
+    driver1->rotateDegrees(200, 720);
+    sleep_us(driver1->calculateRotateTime_us(200, 720));
 
-    printf("TEST: %d\n", driver->getStatus());
-
-    while (driver->getStatus() == MotorRunning) {
+    puts("Motor 2");
+    driver2->rotateSteps(200, 10000);
+    while (driver2->getStatus() == MotorRunning) {
         sleep_ms(100);
     }
 
     sleep_ms(1072);
     gpio_put(LED_PIN, 0);
 
-    uint16_t degrees = 10;
-    uint8_t speed = 10;
-
     for (;;) {
         puts("Entering Loop");
 
-        driver->rotateDegrees(255, 360, (driver->getDirection() == MotorDirCW) ? MotorDirCCW : MotorDirCW);
-        uint32_t ms = driver->calculateRotateTime_ms(255, 360);
+        bool dir = driver1->getDirection();
+        driver1->rotateDegrees(128, 360, (MotorDirection)!dir);
+        driver2->rotateDegrees(128, 1440, (MotorDirection)dir);
 
-        while (driver->getStatus() == MotorRunning) {
+        while (driver1->getStatus() == MotorRunning) {
             sleep_ms(100);
         }
 
