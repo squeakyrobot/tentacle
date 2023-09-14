@@ -33,8 +33,11 @@ pico_sdk_init()
 add_executable(tentacle-controller src/main.cpp )
 
 target_sources(tentacle-controller PRIVATE 
-  src/motor-driver/motor-driver.cpp 
-  src/motor-driver/timer-motor-driver.cpp)
+  src/util.cpp
+  src/motor-driver/stepper-driver.cpp 
+  src/motor-driver/timer-stepper-driver.cpp
+  src/motor-driver/driver-configuration.cpp
+  )
 
 
 pico_set_program_name(tentacle-controller "tentacle-controller")

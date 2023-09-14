@@ -1,9 +1,11 @@
 
-#include <time.h>
 #include <stdio.h>
+#include <time.h>
+
+#include "driver-configuration.h"
 #include "pico/stdlib.h"
-#include "util.cpp"
-#include "timer-motor-driver.h"
+#include "timer-stepper-driver.h"
+#include "util.h"
 
 // TODO:
 // 1. Create class
@@ -15,63 +17,56 @@
 //   5.2 Sensorless homing to set start point???
 
 // 0-255
-#define SPEED 200
+#define SPEED 128
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 
-TimerMotorDriver *driver = new TimerMotorDriver({
-    directionPin : 16,
-    stepPin : 17,
-    stepsPerRevolution : 2048,
-    microStepMultiplier : 8,
-    maxPulsesPerSecond : 12000,
-    minPulsesPerSecond : 1000
-});
+// TimerStepperDriver *driver = new TimerMotorDriver({
+//     directionPin : 16,
+//     stepPin : 17,
+//     stepsPerRevolution : 2048,
+//     microStepMultiplier : 8,
+//     maxPulsesPerSecond : 12000,
+//     minPulsesPerSecond : 1000
+// });
 
-int main()
-{
+int main() {
+    stdio_init_all();
+    puts("Starting");
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
+    gpio_put(LED_PIN, 1);
 
-    stdio_init_all();
+    TimerStepperDriver *driver = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_64, 17, 16));
 
-    driver->rotate(SPEED, 720);
+    puts("First Rotation");
+    driver->rotateDegrees(255, 1440);
+    sleep_us(driver->calculateRotateTime_us(255, 1440));
 
     printf("TEST: %d\n", driver->getStatus());
 
-    uint32_t x = driver->calculateRotateTime_us(SPEED, 720);
+    while (driver->getStatus() == MotorRunning) {
+        sleep_ms(100);
+    }
 
-    sleep_us(x);
-    driver->stop();
-    gpio_put(LED_PIN, 1);
     sleep_ms(1072);
     gpio_put(LED_PIN, 0);
 
     uint16_t degrees = 10;
     uint8_t speed = 10;
 
-    for (;;)
-    {
+    for (;;) {
+        puts("Entering Loop");
 
-        degrees += 10;
-        speed += 10;
+        driver->rotateDegrees(255, 360, (driver->getDirection() == MotorDirCW) ? MotorDirCCW : MotorDirCW);
+        uint32_t ms = driver->calculateRotateTime_ms(255, 360);
 
-        if (degrees > 360)
-        {
-            degrees = 10;
-        }
-
-        if (speed > 250)
-        {
-            speed = 10;
-        }
-
-        driver->rotate(speed, degrees, (driver->getDirection() == MotorDirCW) ? MotorDirCCW : MotorDirCW);
-
-        while (driver->getStatus() == MotorRunning)
-        {
+        while (driver->getStatus() == MotorRunning) {
             sleep_ms(100);
         }
+
+        puts("Turn Complete");
+        sleep_ms(1000);
 
         gpio_put(LED_PIN, !gpio_get(LED_PIN));
     }

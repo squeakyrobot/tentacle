@@ -1,3 +1,3 @@
 #include <stdio.h>
 
-int normalizeRange(int value, int min, int max, int inMin = 0, int inMax = 100);
+uint32_t normalizeRange(uint32_t value, uint32_t min, uint32_t max, uint32_t inMin = 0, uint32_t inMax = 255);
