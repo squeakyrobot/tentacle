@@ -12,18 +12,6 @@ TimerStepperDriver::~TimerStepperDriver() {
     cancel_repeating_timer(&this->timer);
 };
 
-bool TimerStepperDriver::rotateDegrees(uint8_t speed, uint32_t degrees) {
-    return this->rotateDegrees(speed, degrees, this->direction);
-};
-
-bool TimerStepperDriver::rotateDegrees(uint8_t speed, uint32_t degrees, MotorDirection direction) {
-    return this->rotateSteps(speed, degrees * this->stepsPerDegree, direction);
-};
-
-bool TimerStepperDriver::rotateSteps(uint8_t speed, uint32_t steps) {
-    return this->rotateDegrees(speed, steps, this->direction);
-};
-
 bool TimerStepperDriver::rotateSteps(uint8_t speed, uint32_t steps, MotorDirection direction) {
     if (this->direction != direction) {
         this->direction = direction;

@@ -8,10 +8,10 @@
 #include "util.h"
 
 // TODO:
-// 1. Create class
-// 2. Be able to move n degrees
-// 3. Be able to set limits
-// 4. Be able to stop moving
+// 1. Create class - DONE
+// 2. Be able to move n degrees - DONE
+// 3. Be able to set limits - DONE
+// 4. Be able to stop moving - DONE
 // 5. Maybe track degrees moved, or location from start
 //   5.1 MotorDirCW = positive, MotorDirCCW = negative???
 //   5.2 Sensorless homing to set start point???
@@ -21,15 +21,6 @@
 
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 
-// TimerStepperDriver *driver = new TimerMotorDriver({
-//     directionPin : 16,
-//     stepPin : 17,
-//     stepsPerRevolution : 2048,
-//     microStepMultiplier : 8,
-//     maxPulsesPerSecond : 12000,
-//     minPulsesPerSecond : 1000
-// });
-
 int main() {
     stdio_init_all();
     puts("Starting");
@@ -37,7 +28,7 @@ int main() {
     gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_put(LED_PIN, 1);
 
-    TimerStepperDriver *driver = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_64, 17, 16));
+    StepperDriver *driver = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_64, 17, 16));
 
     puts("First Rotation");
     driver->rotateDegrees(255, 1440);
@@ -66,8 +57,7 @@ int main() {
         }
 
         puts("Turn Complete");
-        sleep_ms(1000);
-
         gpio_put(LED_PIN, !gpio_get(LED_PIN));
+        sleep_ms(1000);
     }
 }

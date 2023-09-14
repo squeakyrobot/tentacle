@@ -8,9 +8,6 @@ class TimerStepperDriver : public StepperDriver {
    public:
     TimerStepperDriver(StepperDriverConfig config);
     ~TimerStepperDriver();
-    bool rotateDegrees(uint8_t speed, uint32_t degrees);
-    bool rotateDegrees(uint8_t speed, uint32_t degrees, MotorDirection direction);
-    bool rotateSteps(uint8_t speed, uint32_t steps);
     bool rotateSteps(uint8_t speed, uint32_t steps, MotorDirection direction);
     bool stop();
     uint32_t remainingSteps;

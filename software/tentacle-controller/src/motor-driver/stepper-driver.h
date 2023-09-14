@@ -25,13 +25,11 @@ class StepperDriver {
    public:
     StepperDriver(StepperDriverConfig config);
     virtual ~StepperDriver(){};
-
     uint32_t calculateRotateTime_ms(uint8_t speed, uint32_t rotationDegrees);
     uint32_t calculateRotateTime_us(uint8_t speed, uint32_t rotationDegrees);
-
-    virtual bool rotateDegrees(uint8_t speed, uint32_t degrees);
-    virtual bool rotateDegrees(uint8_t speed, uint32_t degrees, MotorDirection direction) = 0;
-    virtual bool rotateSteps(uint8_t speed, uint32_t steps);
+    bool rotateDegrees(uint8_t speed, uint32_t degrees);
+    bool rotateDegrees(uint8_t speed, uint32_t degrees, MotorDirection direction);
+    bool rotateSteps(uint8_t speed, uint32_t steps);
     virtual bool rotateSteps(uint8_t speed, uint32_t steps, MotorDirection direction) = 0;
     virtual bool stop() = 0;
 

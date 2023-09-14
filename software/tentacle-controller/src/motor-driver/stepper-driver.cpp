@@ -32,6 +32,10 @@ bool StepperDriver::rotateDegrees(uint8_t speed, uint32_t degrees) {
     return this->rotateDegrees(speed, degrees, this->direction);
 }
 
+bool StepperDriver::rotateDegrees(uint8_t speed, uint32_t degrees, MotorDirection direction) {
+    return this->rotateSteps(speed, degrees * this->stepsPerDegree, direction);
+};
+
 bool StepperDriver::rotateSteps(uint8_t speed, uint32_t steps) {
     return this->rotateSteps(speed, steps, this->direction);
 }
