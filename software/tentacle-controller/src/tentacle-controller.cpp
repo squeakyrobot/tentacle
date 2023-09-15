@@ -3,15 +3,19 @@
 #include "timer-stepper-driver.h"
 
 // TODO: Implement motor limits based on number of tentacle segments
+//          - 4.4mm travel per segment
+//          - Test tentacle: 18 segments - 79.2mm of travel
+//              - Pulley: 18mm ID - 4.4 wraps total, 2.2 neutral position (4.5 is about max without pulley modification)
+//              - TODO: Expand pulley diameter, or make the inside diameter smaller
 // TODO: Implement realtime location updates
 
-TentacleController TentacleController::create(StepperDriverConfig driver1Config, StepperDriverConfig driver2Config) {
+TentacleController* TentacleController::create(TentacleConfig config) {
     // TODO: Update this to support driver type when and if we have more than one
 
-    StepperDriver* driver1 = new TimerStepperDriver(driver1Config);
-    StepperDriver* driver2 = new TimerStepperDriver(driver2Config);
+    StepperDriver* driver1 = new TimerStepperDriver(config.driver1Config);
+    StepperDriver* driver2 = new TimerStepperDriver(config.driver2Config);
 
-    return TentacleController(driver1, driver2);
+    return new TentacleController(config, driver1, driver2);
 }
 
 TentacleController::~TentacleController() {
@@ -21,33 +25,40 @@ TentacleController::~TentacleController() {
     delete this->motor2;
 }
 
-bool TentacleController::move(int16_t amplitude, int16_t rotationDegrees) {
+bool TentacleController::move(uint8_t amplitude, int16_t rotationDegrees) {
     return this->move(amplitude, rotationDegrees, this->systemSpeed);
 }
 
-bool TentacleController::move(int16_t amplitude, int16_t rotationDegrees, uint8_t speed) {
+bool TentacleController::move(uint8_t amplitude, int16_t rotationDegrees, uint8_t speed) {
     TentacleLocation targetLocation;
 
     return this->move(amplitude, rotationDegrees, speed, targetLocation);
 }
 
-bool TentacleController::move(int16_t amplitude, int16_t rotationDegrees, TentacleLocation& targetLocation) {
+bool TentacleController::move(uint8_t amplitude, int16_t rotationDegrees, TentacleLocation& targetLocation) {
     return this->move(amplitude, rotationDegrees, this->systemSpeed, targetLocation);
 }
 
-bool TentacleController::move(int16_t amplitude, int16_t rotationDegrees, uint8_t speed, TentacleLocation& targetLocation) {
+bool TentacleController::move(uint8_t amplitude, int16_t rotationDegrees, uint8_t speed, TentacleLocation& targetLocation) {
     // TODO: Implement
 
     return false;
 }
 
-bool TentacleController::moveTo(uint16_t amplitude, uint16_t rotationDegrees) {
+bool TentacleController::moveTo(uint8_t amplitude, uint16_t rotationDegrees) {
     return this->moveTo(amplitude, rotationDegrees, this->systemSpeed);
 }
 
-bool TentacleController::moveTo(uint16_t amplitude, uint16_t rotationDegrees, uint8_t speed) {
-    // TODO: implement
-    return false;
+bool TentacleController::moveTo(uint8_t amplitude, uint16_t rotationDegrees, uint8_t speed) {
+    // clamp the values
+    rotationDegrees = clampDegrees(rotationDegrees);
+    amplitude = clamp(amplitude, 0, MAX_AMPLITUDE);
+
+    // find the difference from current location
+    int16_t travelAmplitude = amplitude - this->location.amplitude;
+    RotationPath rotationPath = this->calculateRotationPath(rotationDegrees);
+
+    return this->move(travelAmplitude, rotationPath.degrees, rotationPath.direction);
 }
 
 bool TentacleController::rotate(int16_t degrees, RotationDirection direction) {
@@ -74,7 +85,9 @@ bool TentacleController::rotateTo(uint16_t rotationDegrees) {
 }
 
 bool TentacleController::rotateTo(uint16_t rotationDegrees, uint8_t speed) {
-    return this->rotateTo(rotationDegrees, this->getShortestDirection(rotationDegrees), speed);
+    // return this->rotateTo(rotationDegrees, this->calculateRotationPath(rotationDegrees), speed);
+
+    return false;
 }
 
 bool TentacleController::rotateTo(uint16_t rotationDegrees, RotationDirection direction) {
@@ -94,7 +107,7 @@ bool TentacleController::stop() {
     return true;
 }
 
-void TentacleController::resetPosition(uint16_t amplitude, uint16_t rotationDegrees) {
+void TentacleController::resetPosition(uint8_t amplitude, uint16_t rotationDegrees) {
     this->location.amplitude = amplitude;
     this->location.rotationDegrees - rotationDegrees;
 }
@@ -115,18 +128,58 @@ MotionStatus TentacleController::getStatus() {
 // PRIVATE
 //----------------------------------------------------
 
-TentacleController::TentacleController(StepperDriver* stepperDriver1, StepperDriver* stepperDriver2) {
+TentacleController::TentacleController(TentacleConfig config, StepperDriver* stepperDriver1, StepperDriver* stepperDriver2) {
+    // Motor 1 moves the tentacle on the y axis, from 0-180 degrees
     this->motor1 = stepperDriver1;
+
+    // Motor 2 moves the tentacle on the x axis from 90-270 degrees
     this->motor2 = stepperDriver2;
+
+    this->location = {
+        amplitude : 0,
+        rotationDegrees : 0,
+    };
+
+    // Hopefully this can be replaced with homing
+    double maxTravel = config.segments * config.travelPerSegment_um;
+    double maxRotations = maxTravel / config.pulleyDiameter_um;
+    // double maxDegrees = maxRotations * 360;
+
+    uint32_t m1MaxSteps = maxRotations * this->motor1->getStepsPerRevolution();
+    uint32_t m2MaxSteps = maxRotations * this->motor2->getStepsPerRevolution();
+
+    printf(": %d\n", this->motor2->getStepsPerRevolution());
+    printf("Max Rotations: %f\n", maxRotations);
+    // printf("Max Degrees: %f\n", maxDegrees);
+    printf("Max Steps M1: %d\n", m1MaxSteps);
+    printf("Max Steps M2: %d\n", m2MaxSteps);
+
+    // Calculate the steps per each unit of amplitude.
+    // We lose some steps with the integer division, but I think thats ok as it
+    // gives us a natural buffer to not run against the edge
+    //  28BYJ-48 1/16 Example: 181.63 becomes 181 giving us an upper end of 18100
+    //  instead of the actual 18163, losing 63 steps in this example.
+    //  That is a loss of range of ~0.9%
+    this->m1StepsPerAmpUnit = m1MaxSteps / MAX_AMPLITUDE;
+    this->m2StepsPerAmpUnit = m2MaxSteps / MAX_AMPLITUDE;
+
+    printf("Max Steps per Unit M1: %d\n", m1StepsPerAmpUnit);
+    printf("Max Steps per Unit M2: %d\n", m2StepsPerAmpUnit);
 }
 
-RotationDirection TentacleController::getShortestDirection(uint16_t targetDegrees) {
+RotationPath TentacleController::calculateRotationPath(uint16_t targetDegrees) {
     uint16_t current = this->location.rotationDegrees;
     uint16_t distance = (targetDegrees > current) ? targetDegrees - current : current - targetDegrees;
 
     if (distance > 180) {
-        return CounterClockwise;
+        return {
+            direction : CounterClockwise,
+            degrees : (uint16_t)(360 - distance),
+        };
     } else {
-        return Clockwise;
+        return {
+            direction : Clockwise,
+            degrees : distance,
+        };
     }
 }

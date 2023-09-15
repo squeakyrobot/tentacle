@@ -36,6 +36,7 @@ class StepperDriver {
     RotationDirection getDirection();
     uint8_t getStepPin();
     uint8_t getDirectionPin();
+    uint32_t getStepsPerRevolution();
 
    protected:
     uint32_t calculateStepsPerSecond(uint8_t speed);

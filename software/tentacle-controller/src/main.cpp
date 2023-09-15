@@ -4,6 +4,7 @@
 
 #include "driver-configuration.h"
 #include "pico/stdlib.h"
+#include "tentacle-controller.h"
 #include "timer-stepper-driver.h"
 #include "util.h"
 
@@ -28,12 +29,23 @@ int main() {
     gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_put(LED_PIN, 1);
 
-    StepperDriver *driver1 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_64, 17, 16));
-    StepperDriver *driver2 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_64, 27, 26));
+    TentacleConfig config;
+    config.driver1Config = createMotorConfig(TMC2209_28BYJ48_16, 17, 16);
+    config.driver2Config = createMotorConfig(TMC2209_28BYJ48_16, 27, 26);
+
+    TentacleController *tc = TentacleController::create(config);
+
+    StepperDriver *driver1 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_16, 17, 16));
+    StepperDriver *driver2 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_16, 27, 26));
 
     puts("Motor 1");
-    driver1->rotateDegrees(200, 360);
-    sleep_us(driver1->calculateRotateTime_us(200, 360));
+    driver1->rotateDegrees(255, 360);
+    sleep_us(driver1->calculateRotateTime_us(255, 360));
+
+    driver1->rotateDegrees(255, 5000, CounterClockwise);
+    while (driver1->getStatus() == Moving) {
+        sleep_ms(100);
+    }
 
     puts("Motor 2");
     driver2->rotateDegrees(200, 360);

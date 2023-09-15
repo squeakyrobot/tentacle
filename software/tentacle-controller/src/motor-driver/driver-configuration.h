@@ -17,6 +17,19 @@ const StepperDriverConfig TMC2209_28BYJ48_64 = {
 };
 
 /**
+ * 28BYJ-48 (1/16 gear ratio) with a TMC2209 configured for 8 micro steps
+ * TESTED: 70 RPM @ 12v
+ */
+const StepperDriverConfig TMC2209_28BYJ48_16 = {
+    directionPin : 0,
+    stepPin : 0,
+    stepsPerRevolution : 516,
+    microStepMultiplier : 8,
+    invertDirection : true,
+    maxRPM : 70
+};
+
+/**
  * 28BYJ-48 (1/64 gear ratio) with a DRV8825 configured for no microsteps
  */
 const StepperDriverConfig DRV8825_28BYJ48_64 = {

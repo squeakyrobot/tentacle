@@ -52,6 +52,10 @@ uint8_t StepperDriver::getDirectionPin() {
     return this->config.directionPin;
 };
 
+uint32_t StepperDriver::getStepsPerRevolution() {
+    return this->stepsPerRev;
+}
+
 uint32_t StepperDriver::calculateStepsPerSecond(uint8_t speed) {
     return normalizeRange(speed, 0, this->maxStepsPerSecond, 0, 255);
 };
