@@ -8,7 +8,7 @@
 //    public:
 //     PioStepperDriver(StepperDriverConfig config);
 //     ~PioStepperDriver();
-//     bool rotateSteps(uint8_t speed, uint32_t steps, MotorDirection direction);
+//     bool rotateSteps(uint8_t speed, uint32_t steps, RotationDirection direction);
 //     bool stop();
 //     uint32_t remainingSteps;
 

@@ -3,25 +3,23 @@
 #ifndef _STEPPER_DRIVER_
 #define _STEPPER_DRIVER_
 
-struct StepperDriverConfig {
+#include "util.h"
+
+enum StepperDriverType {
+    TimerDriver = 1,
+};
+
+typedef struct {
     uint8_t directionPin;
     uint8_t stepPin;
     uint16_t stepsPerRevolution;
     uint16_t microStepMultiplier = 1;
     bool invertDirection = false;
     float maxRPM;
-};
+    StepperDriverType driverType = TimerDriver;
+} StepperDriverConfig;
 
-enum MotorStatus {
-    MotorStopped,
-    MotorRunning,
-};
-
-enum MotorDirection {
-    MotorDirCW = 0,
-    MotorDirCCW = 1,
-};
-
+// TODO: add `bool homingSupported` and `home`
 class StepperDriver {
    public:
     StepperDriver(StepperDriverConfig config);
@@ -29,13 +27,13 @@ class StepperDriver {
     uint32_t calculateRotateTime_ms(uint8_t speed, uint32_t rotationDegrees);
     uint32_t calculateRotateTime_us(uint8_t speed, uint32_t rotationDegrees);
     bool rotateDegrees(uint8_t speed, uint32_t degrees);
-    bool rotateDegrees(uint8_t speed, uint32_t degrees, MotorDirection direction);
+    bool rotateDegrees(uint8_t speed, uint32_t degrees, RotationDirection direction);
     bool rotateSteps(uint8_t speed, uint32_t steps);
-    virtual bool rotateSteps(uint8_t speed, uint32_t steps, MotorDirection direction) = 0;
+    virtual bool rotateSteps(uint8_t speed, uint32_t steps, RotationDirection direction) = 0;
     virtual bool stop() = 0;
 
-    MotorStatus getStatus();
-    MotorDirection getDirection();
+    MotionStatus getStatus();
+    RotationDirection getDirection();
     uint8_t getStepPin();
     uint8_t getDirectionPin();
 
@@ -45,8 +43,8 @@ class StepperDriver {
     uint32_t stepsPerRev;
     double stepsPerDegree;
     float maxStepsPerSecond;
-    MotorStatus status = MotorStopped;
-    MotorDirection direction = MotorDirCW;
+    MotionStatus status = Stopped;
+    RotationDirection direction = Clockwise;
 };
 
 #endif

@@ -38,6 +38,7 @@ target_sources(tentacle-controller PRIVATE
   src/motor-driver/timer-stepper-driver.cpp
   # src/motor-driver/pio-stepper-driver.cpp
   src/motor-driver/driver-configuration.cpp
+  src/tentacle-controller.cpp
   )
 
   pico_generate_pio_header(tentacle-controller ${CMAKE_CURRENT_LIST_DIR}/src/motor-driver/stepper.pio)

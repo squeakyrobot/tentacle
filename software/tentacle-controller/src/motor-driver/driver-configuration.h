@@ -40,6 +40,7 @@ const StepperDriverConfig TMC2209_NEMA8 = {
     maxRPM : 150
 };
 
+// TODO: add type
 StepperDriverConfig createMotorConfig(StepperDriverConfig config, uint8_t stepPin, uint8_t directionPin);
 
 #endif

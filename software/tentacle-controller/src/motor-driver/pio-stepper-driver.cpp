@@ -5,14 +5,14 @@
 //     gpio_init(config.directionPin);
 //     gpio_set_dir(config.stepPin, GPIO_OUT);
 //     gpio_set_dir(config.directionPin, GPIO_OUT);
-//     gpio_put(config.directionPin, (this->config.invertDirection) ? !MotorDirCW : MotorDirCW);
+//     gpio_put(config.directionPin, (this->config.invertDirection) ? !Clockwise : Clockwise);
 // };
 
 // PioStepperDriver::~PioStepperDriver(){
 //     // TODO: clean up
 // };
 
-// bool PioStepperDriver::rotateSteps(uint8_t speed, uint32_t steps, MotorDirection direction) {
+// bool PioStepperDriver::rotateSteps(uint8_t speed, uint32_t steps, RotationDirection direction) {
 //     if (this->direction != direction) {
 //         this->direction = direction;
 //         gpio_put(this->config.directionPin, (this->config.invertDirection) ? !direction : direction);
@@ -29,7 +29,7 @@
 //     uint32_t stepsPerSecond = this->calculateStepsPerSecond(speed);
 
 //     this->remainingSteps = steps;
-//     this->status = MotorRunning;
+//     this->status = Moving;
 
 //     // It takes two timer triggers to complete one step
 //     uint32_t delay = stepsPerSecond * 2;
@@ -38,7 +38,7 @@
 // };
 
 // bool PioStepperDriver::stop() {
-//     this->status = MotorStopped;
+//     this->status = Stopped;
 
 //     return false
 // };
