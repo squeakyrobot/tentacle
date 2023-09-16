@@ -37,6 +37,8 @@ class StepperDriver {
     uint8_t getStepPin();
     uint8_t getDirectionPin();
     uint32_t getStepsPerRevolution();
+    uint32_t getStepLocation();
+    int64_t stepsFromHome;
 
    protected:
     uint32_t calculateStepsPerSecond(uint8_t speed);

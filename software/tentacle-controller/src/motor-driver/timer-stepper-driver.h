@@ -10,7 +10,7 @@ class TimerStepperDriver : public StepperDriver {
     ~TimerStepperDriver();
     bool rotateSteps(uint8_t speed, uint32_t steps, RotationDirection direction);
     bool stop();
-    uint32_t remainingSteps;
+    uint32_t remainingSteps{};
 
    protected:
     static bool timerCallback(repeating_timer_t* repeatingTimer);

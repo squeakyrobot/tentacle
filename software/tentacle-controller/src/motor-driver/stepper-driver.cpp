@@ -56,6 +56,10 @@ uint32_t StepperDriver::getStepsPerRevolution() {
     return this->stepsPerRev;
 }
 
+uint32_t StepperDriver::getStepLocation() {
+    return this->stepsFromHome;
+}
+
 uint32_t StepperDriver::calculateStepsPerSecond(uint8_t speed) {
     return normalizeRange(speed, 0, this->maxStepsPerSecond, 0, 255);
 };

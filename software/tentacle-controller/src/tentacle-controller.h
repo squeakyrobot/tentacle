@@ -23,8 +23,8 @@ typedef struct {
     StepperDriverConfig driver1Config;
     StepperDriverConfig driver2Config;
     uint8_t segments = 18;
-    uint16_t travelPerSegment_um = 4400;  // 4.4mm
-    uint16_t pulleyDiameter_um = 18000;   // 18mm
+    uint16_t travelPerSegment_um = 4400;      // 4.4mm
+    uint16_t pulleyCircumference_um = 56549;  // 18mm Diameter (56.549mm CIR)
 } TentacleConfig;
 
 /**

@@ -6,6 +6,7 @@ TimerStepperDriver::TimerStepperDriver(StepperDriverConfig config) : StepperDriv
     gpio_set_dir(config.stepPin, GPIO_OUT);
     gpio_set_dir(config.directionPin, GPIO_OUT);
     gpio_put(config.directionPin, (this->config.invertDirection) ? !Clockwise : Clockwise);
+    this->stepsFromHome = 0;
 };
 
 TimerStepperDriver::~TimerStepperDriver() {
@@ -49,9 +50,17 @@ bool TimerStepperDriver::timerCallback(repeating_timer_t *repeatingTimer) {
     bool stepPinValue = !gpio_get(stepPin);
     gpio_put(stepPin, stepPinValue);
 
-    if (stepPinValue && --driver->remainingSteps <= 0) {
-        driver->stop();
-        return false;
+    if (stepPinValue) {
+        if (driver->direction == Clockwise) {
+            driver->stepsFromHome++;
+        } else {
+            driver->stepsFromHome--;
+        }
+
+        if ((driver->remainingSteps--) <= 0) {
+            driver->stop();
+            return false;
+        }
     }
 
     return true;  // keep repeating

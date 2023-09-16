@@ -4,8 +4,8 @@
 
 // TODO: Implement motor limits based on number of tentacle segments
 //          - 4.4mm travel per segment
-//          - Test tentacle: 18 segments - 79.2mm of travel
-//              - Pulley: 18mm ID - 4.4 wraps total, 2.2 neutral position (4.5 is about max without pulley modification)
+//          - Test tentacle: 18 segments - 79.2mm of travel - each direction
+//              - Pulley: 18mm Diameter - 1.4 wraps per direction, 2.8 Total
 //              - TODO: Expand pulley diameter, or make the inside diameter smaller
 // TODO: Implement realtime location updates
 
@@ -142,7 +142,7 @@ TentacleController::TentacleController(TentacleConfig config, StepperDriver* ste
 
     // Hopefully this can be replaced with homing
     double maxTravel = config.segments * config.travelPerSegment_um;
-    double maxRotations = maxTravel / config.pulleyDiameter_um;
+    double maxRotations = maxTravel / config.pulleyCircumference_um;
     // double maxDegrees = maxRotations * 360;
 
     uint32_t m1MaxSteps = maxRotations * this->motor1->getStepsPerRevolution();
