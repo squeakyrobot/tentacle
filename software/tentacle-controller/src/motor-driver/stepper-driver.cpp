@@ -1,5 +1,7 @@
 #include "stepper-driver.h"
 
+#include <cmath>
+
 StepperDriver::StepperDriver(StepperDriverConfig config) {
     this->config = config;
     this->stepsPerRev = config.stepsPerRevolution * config.microStepMultiplier;
@@ -32,8 +34,14 @@ bool StepperDriver::rotateDegrees(uint8_t speed, uint32_t degrees, RotationDirec
     return this->rotateSteps(speed, degrees * this->stepsPerDegree, direction);
 };
 
-bool StepperDriver::rotateSteps(uint8_t speed, uint32_t steps) {
-    return this->rotateSteps(speed, steps, this->direction);
+bool StepperDriver::rotateSteps(uint8_t speed, int32_t steps) {
+    if (steps == 0) {
+        return true;
+    }
+
+    printf("xDirection: %d\n", (steps > 0) ? Clockwise : CounterClockwise);
+    printf("xSteps: %d\n", steps);
+    return this->rotateSteps(speed, abs(steps), (steps > 0) ? Clockwise : CounterClockwise);
 }
 
 MotionStatus StepperDriver::getStatus() {
@@ -56,8 +64,12 @@ uint32_t StepperDriver::getStepsPerRevolution() {
     return this->stepsPerRev;
 }
 
-uint32_t StepperDriver::getStepLocation() {
+int32_t StepperDriver::getStepLocation() {
     return this->stepsFromHome;
+}
+
+void StepperDriver::getStepLocation(int64_t steps) {
+    this->stepsFromHome = steps;
 }
 
 uint32_t StepperDriver::calculateStepsPerSecond(uint8_t speed) {

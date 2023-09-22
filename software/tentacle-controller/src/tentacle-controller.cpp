@@ -1,5 +1,7 @@
 #include "tentacle-controller.h"
 
+#include <cmath>
+
 #include "timer-stepper-driver.h"
 
 // TODO: Implement motor limits based on number of tentacle segments
@@ -25,40 +27,71 @@ TentacleController::~TentacleController() {
     delete this->motor2;
 }
 
-bool TentacleController::move(uint8_t amplitude, int16_t rotationDegrees) {
-    return this->move(amplitude, rotationDegrees, this->systemSpeed);
+bool TentacleController::move(int16_t amplitude, int16_t degrees) {
+    return this->move(amplitude, degrees, this->systemSpeed);
 }
 
-bool TentacleController::move(uint8_t amplitude, int16_t rotationDegrees, uint8_t speed) {
+bool TentacleController::move(int16_t amplitude, int16_t degrees, uint8_t speed) {
     TentacleLocation targetLocation;
 
-    return this->move(amplitude, rotationDegrees, speed, targetLocation);
+    return this->move(amplitude, degrees, speed, targetLocation);
 }
 
-bool TentacleController::move(uint8_t amplitude, int16_t rotationDegrees, TentacleLocation& targetLocation) {
-    return this->move(amplitude, rotationDegrees, this->systemSpeed, targetLocation);
+bool TentacleController::move(int16_t amplitude, int16_t degrees, TentacleLocation& targetLocation) {
+    return this->move(amplitude, degrees, this->systemSpeed, targetLocation);
 }
 
-bool TentacleController::move(uint8_t amplitude, int16_t rotationDegrees, uint8_t speed, TentacleLocation& targetLocation) {
-    // TODO: Implement
+bool TentacleController::move(int16_t amplitude, int16_t degrees, uint8_t speed, TentacleLocation& targetLocation) {
+    // Find the final target location after the move
+    uint16_t angle = (degrees + 360) % 360;
 
-    return false;
+    targetLocation.angle = (targetLocation.angle + angle) % 360;
+    targetLocation.amplitude = clamp(targetLocation.amplitude + amplitude, 0, MAX_AMPLITUDE);
+
+    // Find the target locatioin in motor steps
+    TentacleLocationSteps locationSteps = this->calculateMotorLocation(targetLocation.amplitude, targetLocation.angle);
+
+    // Find the difference from the current location
+    this->motor1->stop();
+    this->motor2->stop();
+    uint32_t m1Travel = this->motor1->getStepLocation() - locationSteps.motor1Steps;
+    uint32_t m2Travel = this->motor2->getStepLocation() - locationSteps.motor2Steps;
+
+    this->motor1->rotateSteps(speed, m1Travel);
+    this->motor2->rotateSteps(speed, m2Travel);
+
+    // TODO: Figure out how to update status & location and get a callback when the move is complete
+
+    return true;
 }
 
-bool TentacleController::moveTo(uint8_t amplitude, uint16_t rotationDegrees) {
-    return this->moveTo(amplitude, rotationDegrees, this->systemSpeed);
+bool TentacleController::moveTo(uint8_t amplitude, uint16_t angle) {
+    return this->moveTo(amplitude, angle, this->systemSpeed);
 }
 
-bool TentacleController::moveTo(uint8_t amplitude, uint16_t rotationDegrees, uint8_t speed) {
-    // clamp the values
-    rotationDegrees = clampDegrees(rotationDegrees);
+bool TentacleController::moveTo(uint8_t amplitude, uint16_t angle, uint8_t speed) {
+    angle = clampDegrees(angle);
     amplitude = clamp(amplitude, 0, MAX_AMPLITUDE);
 
-    // find the difference from current location
-    int16_t travelAmplitude = amplitude - this->location.amplitude;
-    RotationPath rotationPath = this->calculateRotationPath(rotationDegrees);
+    // Find the target locatioin in motor steps
+    TentacleLocationSteps locationSteps = this->calculateMotorLocation(amplitude, angle);
 
-    return this->move(travelAmplitude, rotationPath.degrees, rotationPath.direction);
+    printf("M1 Target Steps: %d\n", locationSteps.motor1Steps);
+    printf("\tLocation: %d\n", this->motor1->getStepLocation());
+
+    // Find the difference from the current location
+    this->motor1->stop();
+    this->motor2->stop();
+    uint32_t m1Travel = locationSteps.motor1Steps - this->motor1->getStepLocation();
+    uint32_t m2Travel = locationSteps.motor2Steps - this->motor2->getStepLocation();
+
+    printf("M1 Location: %d\n", this->motor1->getStepLocation());
+    printf("M1 Travel Steps: %d\n", m1Travel);
+
+    this->motor1->rotateSteps(speed, m1Travel);
+    this->motor2->rotateSteps(speed, m2Travel);
+
+    return true;
 }
 
 bool TentacleController::rotate(int16_t degrees, RotationDirection direction) {
@@ -80,21 +113,21 @@ bool TentacleController::rotate(int16_t degrees, RotationDirection direction, ui
     return false;
 }
 
-bool TentacleController::rotateTo(uint16_t rotationDegrees) {
-    return this->rotateTo(rotationDegrees, this->systemSpeed);
+bool TentacleController::rotateTo(uint16_t angle) {
+    return this->rotateTo(angle, this->systemSpeed);
 }
 
-bool TentacleController::rotateTo(uint16_t rotationDegrees, uint8_t speed) {
-    // return this->rotateTo(rotationDegrees, this->calculateRotationPath(rotationDegrees), speed);
+bool TentacleController::rotateTo(uint16_t angle, uint8_t speed) {
+    // return this->rotateTo(angle, this->calculateRotationPath(angle), speed);
 
     return false;
 }
 
-bool TentacleController::rotateTo(uint16_t rotationDegrees, RotationDirection direction) {
-    return this->rotateTo(rotationDegrees, direction, this->systemSpeed);
+bool TentacleController::rotateTo(uint16_t angle, RotationDirection direction) {
+    return this->rotateTo(angle, direction, this->systemSpeed);
 }
 
-bool TentacleController::rotateTo(uint16_t rotationDegrees, RotationDirection direction, uint8_t speed) {
+bool TentacleController::rotateTo(uint16_t angle, RotationDirection direction, uint8_t speed) {
     // TODO: implement
     return false;
 }
@@ -107,9 +140,9 @@ bool TentacleController::stop() {
     return true;
 }
 
-void TentacleController::resetPosition(uint8_t amplitude, uint16_t rotationDegrees) {
+void TentacleController::resetPosition(uint8_t amplitude, uint16_t angle) {
     this->location.amplitude = amplitude;
-    this->location.rotationDegrees - rotationDegrees;
+    this->location.angle - angle;
 }
 
 void TentacleController::setSpeed(uint8_t speed) {
@@ -121,7 +154,7 @@ uint8_t TentacleController::getSpeed() {
 }
 
 MotionStatus TentacleController::getStatus() {
-    return MotionStatus();
+    return (this->motor1->getStatus() == Moving || this->motor2->getStatus() == Moving) ? Moving : Stopped;
 }
 
 // ---------------------------------------------------
@@ -137,11 +170,11 @@ TentacleController::TentacleController(TentacleConfig config, StepperDriver* ste
 
     this->location = {
         amplitude : 0,
-        rotationDegrees : 0,
+        angle : 0,
     };
 
     // Hopefully this can be replaced with homing
-    double maxTravel = config.segments * config.travelPerSegment_um;
+    double maxTravel = (config.segments * config.travelPerSegment_um) * 2;
     double maxRotations = maxTravel / config.pulleyCircumference_um;
     // double maxDegrees = maxRotations * 360;
 
@@ -168,8 +201,8 @@ TentacleController::TentacleController(TentacleConfig config, StepperDriver* ste
 }
 
 RotationPath TentacleController::calculateRotationPath(uint16_t targetDegrees) {
-    uint16_t current = this->location.rotationDegrees;
-    uint16_t distance = (targetDegrees > current) ? targetDegrees - current : current - targetDegrees;
+    uint16_t current = this->location.angle;
+    uint16_t distance = abs(targetDegrees - current);
 
     if (distance > 180) {
         return {
@@ -182,4 +215,47 @@ RotationPath TentacleController::calculateRotationPath(uint16_t targetDegrees) {
             degrees : distance,
         };
     }
+}
+
+TentacleLocationSteps TentacleController::calculateMotorLocation(uint8_t amplitude, uint16_t angle) {
+    uint8_t quadrant = (angle / 90) % 4 + 1;
+
+    // Q1, 0-89: Motor1+, motor2+
+    // Q2, 90-179: Motor1-, motor2+
+    // Q3, 180-269: Motor1-, motor2-
+    // Q4, 270-359: Motor1+, motor2-
+
+    float mul = (float)(angle % 90) / 90;
+    uint8_t m1Amp, m2Amp;
+    TentacleLocationSteps location;
+
+    if (quadrant == 1) {
+        m1Amp = round(amplitude * (float)(1 - mul));
+        m2Amp = amplitude - m1Amp;
+
+        location.motor1Steps = m1Amp * this->m1StepsPerAmpUnit;
+        location.motor2Steps = m2Amp * this->m2StepsPerAmpUnit;
+    } else if (quadrant == 2) {
+        m1Amp = round(amplitude * mul);
+        m2Amp = amplitude - m1Amp;
+
+        location.motor1Steps = -(m1Amp * this->m1StepsPerAmpUnit);
+        location.motor2Steps = m2Amp * this->m2StepsPerAmpUnit;
+
+    } else if (quadrant == 3) {
+        m1Amp = round(amplitude * (float)(1 - mul));
+        m2Amp = amplitude - m1Amp;
+
+        location.motor1Steps = -(m1Amp * this->m1StepsPerAmpUnit);
+        location.motor2Steps = -(m2Amp * this->m2StepsPerAmpUnit);
+
+    } else if (quadrant == 4) {
+        m1Amp = round(amplitude * mul);
+        m2Amp = amplitude - m1Amp;
+
+        location.motor1Steps = m1Amp * this->m1StepsPerAmpUnit;
+        location.motor2Steps = -(m2Amp * this->m2StepsPerAmpUnit);
+    }
+
+    return location;
 }

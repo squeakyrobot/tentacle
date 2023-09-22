@@ -28,7 +28,7 @@ class StepperDriver {
     uint32_t calculateRotateTime_us(uint8_t speed, uint32_t rotationDegrees);
     bool rotateDegrees(uint8_t speed, uint32_t degrees);
     bool rotateDegrees(uint8_t speed, uint32_t degrees, RotationDirection direction);
-    bool rotateSteps(uint8_t speed, uint32_t steps);
+    bool rotateSteps(uint8_t speed, int32_t steps);
     virtual bool rotateSteps(uint8_t speed, uint32_t steps, RotationDirection direction) = 0;
     virtual bool stop() = 0;
 
@@ -37,8 +37,8 @@ class StepperDriver {
     uint8_t getStepPin();
     uint8_t getDirectionPin();
     uint32_t getStepsPerRevolution();
-    uint32_t getStepLocation();
-    int64_t stepsFromHome;
+    int32_t getStepLocation();
+    void getStepLocation(int64_t steps);
 
    protected:
     uint32_t calculateStepsPerSecond(uint8_t speed);
@@ -48,6 +48,7 @@ class StepperDriver {
     float maxStepsPerSecond;
     MotionStatus status = Stopped;
     RotationDirection direction = Clockwise;
+    int32_t stepsFromHome;
 };
 
 #endif

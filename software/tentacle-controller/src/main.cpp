@@ -29,75 +29,81 @@ int main() {
     gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_put(LED_PIN, 1);
 
-    // TentacleConfig config;
-    // config.driver1Config = createMotorConfig(TMC2209_28BYJ48_16, 17, 16);
-    // config.driver2Config = createMotorConfig(TMC2209_28BYJ48_16, 27, 26);
+    TentacleConfig config;
+    config.driver1Config = createMotorConfig(DRV8825_28BYJ48_64, 14, 15);
+    config.driver2Config = createMotorConfig(DRV8825_28BYJ48_64, 17, 16);
 
-    // TentacleController *tc = TentacleController::create(config);
+    TentacleController *tc = TentacleController::create(config);
 
-    StepperDriver *driver1 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_16, 17, 16));
-    StepperDriver *driver2 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_16, 27, 26));
-
-    printf("Motor 1 location: %d\n", driver1->getStepLocation());
-    printf("Motor 2 location: %d\n", driver2->getStepLocation());
-    sleep_ms(500);
-
-    puts("Motor 1");
-    driver1->rotateDegrees(255, 360);
-    sleep_us(driver1->calculateRotateTime_us(255, 360));
-
-    printf("Motor 1 location: %d\n", driver1->getStepLocation());
-    printf("Motor 2 location: %d\n", driver2->getStepLocation());
-
-    driver1->rotateDegrees(255, 360, CounterClockwise);
-    while (driver1->getStatus() == Moving) {
-        sleep_ms(100);
-    }
-
-    printf("Motor 1 location: %d\n", driver1->getStepLocation());
-    printf("Motor 2 location: %d\n", driver2->getStepLocation());
-
-    puts("Motor 2");
-    driver2->rotateDegrees(200, 360);
-    while (driver2->getStatus() == Moving) {
-        sleep_ms(100);
-    }
-
-    printf("Motor 1 location: %d\n", driver1->getStepLocation());
-    printf("Motor 2 location: %d\n", driver2->getStepLocation());
+    // StepperDriver *driver1 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_16, 17, 16));
+    // StepperDriver *driver2 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_16, 27, 26));
+    tc->setSpeed(200);
 
     sleep_ms(1072);
     gpio_put(LED_PIN, 0);
 
+    tc->moveTo(25, 0);
+    while (tc->getStatus() == Moving) {
+        sleep_ms(100);
+    }
+
+    tc->moveTo(0, 0);
+    while (tc->getStatus() == Moving) {
+        sleep_ms(100);
+    }
+
+    tc->moveTo(25, 45);
+    while (tc->getStatus() == Moving) {
+        sleep_ms(100);
+    }
+
+    tc->moveTo(25, 0);
+    while (tc->getStatus() == Moving) {
+        sleep_ms(100);
+    }
+
+    tc->moveTo(0, 0);
+    while (tc->getStatus() == Moving) {
+        sleep_ms(100);
+    }
+
+    sleep_ms(1000);
+
+    // tc->move(50, 45); // TODO: Check & fix move
+
     for (;;) {
-        puts("Entering Loop");
+        // puts("Entering Loop");
 
-        bool dir = !driver1->getDirection();
-        driver1->rotateDegrees(200, 700, (RotationDirection)dir);
-        driver2->rotateDegrees(200, 700, (RotationDirection)dir);
-
-        while (driver1->getStatus() == Moving) {
-            sleep_ms(100);
+        tc->moveTo(35, 10);
+        while (tc->getStatus() == Moving) {
+            sleep_ms(500);
         }
 
-        driver1->rotateDegrees(200, 500, (RotationDirection)!dir);
-        while (driver1->getStatus() == Moving) {
-            sleep_ms(100);
+        tc->moveTo(35, 90);
+        while (tc->getStatus() == Moving) {
+            sleep_ms(500);
         }
 
-        driver1->rotateDegrees(200, 500, (RotationDirection)dir);
-        while (driver1->getStatus() == Moving) {
-            sleep_ms(100);
+        tc->moveTo(35, 180);
+        while (tc->getStatus() == Moving) {
+            sleep_ms(500);
         }
 
-        sleep_ms(500);
-        driver2->rotateDegrees(200, 700, (RotationDirection)!dir);
-        while (driver2->getStatus() == Moving) {
-            sleep_ms(100);
+        tc->moveTo(35, 270);
+        while (tc->getStatus() == Moving) {
+            sleep_ms(500);
         }
 
-        puts("Turn Complete");
-        gpio_put(LED_PIN, !gpio_get(LED_PIN));
-        sleep_ms(1000);
+        tc->moveTo(35, 180);
+        while (tc->getStatus() == Moving) {
+            sleep_ms(500);
+        }
+
+        tc->moveTo(0, 0);
+        while (tc->getStatus() == Moving) {
+            sleep_ms(500);
+        }
+
+        sleep_ms(20000);
     }
 }

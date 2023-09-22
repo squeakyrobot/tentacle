@@ -14,6 +14,11 @@ TimerStepperDriver::~TimerStepperDriver() {
 };
 
 bool TimerStepperDriver::rotateSteps(uint8_t speed, uint32_t steps, RotationDirection direction) {
+    if (steps == 0) {
+        return true;
+    }
+
+    puts("Timer Rotate Steps");
     if (this->direction != direction) {
         this->direction = direction;
         gpio_put(this->config.directionPin, (this->config.invertDirection) ? !direction : direction);
@@ -58,6 +63,7 @@ bool TimerStepperDriver::timerCallback(repeating_timer_t *repeatingTimer) {
         }
 
         if ((driver->remainingSteps--) <= 0) {
+            printf("Move Stopped: %d\n", driver->stepsFromHome);
             driver->stop();
             return false;
         }

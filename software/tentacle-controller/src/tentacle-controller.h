@@ -11,8 +11,13 @@ typedef struct {
     uint8_t amplitude;
 
     // Degrees will be clamped between 0-360
-    uint16_t rotationDegrees;
+    uint16_t angle;
 } TentacleLocation;
+
+typedef struct {
+    int32_t motor1Steps;
+    int32_t motor2Steps;
+} TentacleLocationSteps;
 
 typedef struct {
     RotationDirection direction;
@@ -22,8 +27,8 @@ typedef struct {
 typedef struct {
     StepperDriverConfig driver1Config;
     StepperDriverConfig driver2Config;
-    uint8_t segments = 18;
-    uint16_t travelPerSegment_um = 4400;      // 4.4mm
+    uint8_t segments = 20;
+    uint16_t travelPerSegment_um = 4000;      // 4mm     // 4.4mm
     uint16_t pulleyCircumference_um = 56549;  // 18mm Diameter (56.549mm CIR)
 } TentacleConfig;
 
@@ -41,18 +46,19 @@ class TentacleController {
 
     /**
      * Moves the given amount from the current location.
+     * TODO: explain that this is a direct move th the final calculated location
      * For rotation positive values move clockwise and negative values move counter clockwise.
      */
-    bool move(uint8_t amplitude, int16_t degrees);
-    bool move(uint8_t amplitude, int16_t degrees, uint8_t speed);
-    bool move(uint8_t amplitude, int16_t degrees, TentacleLocation& targetLocation);
-    bool move(uint8_t amplitude, int16_t degrees, uint8_t speed, TentacleLocation& targetLocation);
+    bool move(int16_t amplitude, int16_t degrees);
+    bool move(int16_t amplitude, int16_t degrees, uint8_t speed);
+    bool move(int16_t amplitude, int16_t degrees, TentacleLocation& targetLocation);
+    bool move(int16_t amplitude, int16_t degrees, uint8_t speed, TentacleLocation& targetLocation);
 
     /**
      * Moves to the provided location.
      */
-    bool moveTo(uint8_t amplitude, uint16_t rotationDegrees);
-    bool moveTo(uint8_t amplitude, uint16_t rotationDegrees, uint8_t speed);
+    bool moveTo(uint8_t amplitude, uint16_t angle);
+    bool moveTo(uint8_t amplitude, uint16_t angle, uint8_t speed);
 
     /**
      * Rotates the given amount from the current location.
@@ -67,10 +73,10 @@ class TentacleController {
      * Rotates to the provided location.
      * If no direction is provided then it will take the shortest path
      */
-    bool rotateTo(uint16_t rotationDegrees);
-    bool rotateTo(uint16_t rotationDegrees, uint8_t speed);
-    bool rotateTo(uint16_t rotationDegrees, RotationDirection direction);
-    bool rotateTo(uint16_t rotationDegrees, RotationDirection direction, uint8_t speed);
+    bool rotateTo(uint16_t angle);
+    bool rotateTo(uint16_t angle, uint8_t speed);
+    bool rotateTo(uint16_t angle, RotationDirection direction);
+    bool rotateTo(uint16_t angle, RotationDirection direction, uint8_t speed);
 
     /**
      * Stops any moves that are in progress
@@ -80,7 +86,7 @@ class TentacleController {
     /**
      * Sets the internal amplitude and location values without moving the tentacle
      */
-    void resetPosition(uint8_t amplitude, uint16_t rotationDegrees);
+    void resetPosition(uint8_t amplitude, uint16_t angle);
 
     /**
      * Readonly pointer to the thentacles current location
@@ -106,6 +112,7 @@ class TentacleController {
 
    private:
     TentacleController(TentacleConfig config, StepperDriver* stepperDriver1, StepperDriver* stepperDriver2);
+    TentacleLocationSteps calculateMotorLocation(uint8_t amplitude, uint16_t angle);
     RotationPath calculateRotationPath(uint16_t targetDegrees);
     TentacleLocation location;
     StepperDriver* motor1;
