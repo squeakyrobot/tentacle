@@ -37,7 +37,7 @@ const StepperDriverConfig TMC2209_28BYJ48_16 = {
 const StepperDriverConfig DRV8825_28BYJ48_64 = {
     directionPin : 0,
     stepPin : 0,
-    stepsPerRevolution : 2038,  // 2052,  // 2038???
+    stepsPerRevolution : 2052,  // 2052,  // 2038???
     microStepMultiplier : 1,
     invertDirection : false,
     maxRPM : 25
