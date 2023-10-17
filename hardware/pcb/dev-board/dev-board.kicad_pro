@@ -55,7 +55,13 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "items_not_allowed|171378725|51812897|ef6c21a5-adcd-4282-ae85-877043218980|00000000-0000-0000-0000-000000000000",
+        "items_not_allowed|172115031|54745538|96716e7e-c262-4920-b769-3d9614e5027d|00000000-0000-0000-0000-000000000000",
+        "items_not_allowed|176365000|55090000|4abde95f-e07a-4340-93a6-e6ddcd0a1efb|00000000-0000-0000-0000-000000000000",
+        "items_not_allowed|176665000|52060000|0c3713d4-32d9-4864-9d2f-3e6c1cf7d80f|00000000-0000-0000-0000-000000000000",
+        "starved_thermal|156800000|112690000|6d38f75f-f5c1-40f7-ad29-19b62beb415f|6ac5aa2a-ee3b-4636-b9b3-37341fb23aa8|B.Cu"
+      ],
       "meta": {
         "version": 2
       },
@@ -65,7 +71,7 @@
         "connection_width": "warning",
         "copper_edge_clearance": "error",
         "copper_sliver": "warning",
-        "courtyards_overlap": "error",
+        "courtyards_overlap": "ignore",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
         "drill_out_of_range": "error",
@@ -93,7 +99,7 @@
         "shorting_items": "error",
         "silk_edge_clearance": "warning",
         "silk_over_copper": "warning",
-        "silk_overlap": "warning",
+        "silk_overlap": "ignore",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
         "starved_thermal": "error",
