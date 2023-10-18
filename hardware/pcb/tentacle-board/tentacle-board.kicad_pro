@@ -384,7 +384,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
       "simulation_model_issue": "ignore",
@@ -705,6 +705,14 @@
     [
       "d454cd10-f556-44dd-adb6-83df793ddd31",
       ""
+    ],
+    [
+      "a708fbb2-70ed-4316-8106-f355b0ec665b",
+      "Motor Driver"
+    ],
+    [
+      "77daf5cb-ccfd-4d97-90e7-081454685c3b",
+      "Motor Driver1"
     ]
   ],
   "text_variables": {}
