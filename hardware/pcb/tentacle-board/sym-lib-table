@@ -3,4 +3,5 @@
   (lib (name "MCU_RaspberryPi_RP2040")(type "KiCad")(uri "${KIPRJMOD}/MCU_RaspberryPi_RP2040.kicad_sym")(options "")(descr ""))
   (lib (name "tentacle-board")(type "KiCad")(uri "${KIPRJMOD}/tentacle-board-rescue.kicad_sym")(options "")(descr ""))
   (lib (name "DRV8825PWP")(type "KiCad")(uri "${KIPRJMOD}/lib/DRV8825PWP.kicad_sym")(options "")(descr ""))
+  (lib (name "UCD1E101MCL1GS")(type "Legacy")(uri "${KIPRJMOD}/lib/UCD1E101MCL1GS.lib")(options "")(descr ""))
 )
