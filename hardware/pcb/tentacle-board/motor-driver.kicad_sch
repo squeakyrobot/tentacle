@@ -599,11 +599,11 @@
         )
       )
     )
-    (symbol "power:VMM" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
-      (property "Reference" "#PWR" (at 0 -3.81 0)
+    (symbol "power:VDC" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+      (property "Reference" "#PWR" (at 0 -2.54 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "Value" "VMM" (at 0 3.81 0)
+      (property "Value" "VDC" (at 0 6.35 0)
         (effects (font (size 1.27 1.27)))
       )
       (property "Footprint" "" (at 0 0 0)
@@ -615,10 +615,10 @@
       (property "ki_keywords" "global power" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_description" "Power symbol creates a global label with name \"VMM\"" (at 0 0 0)
+      (property "ki_description" "Power symbol creates a global label with name \"VDC\"" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "VMM_0_1"
+      (symbol "VDC_0_1"
         (polyline
           (pts
             (xy -0.762 1.27)
@@ -644,9 +644,9 @@
           (fill (type none))
         )
       )
-      (symbol "VMM_1_1"
+      (symbol "VDC_1_1"
         (pin power_in line (at 0 0 90) (length 0) hide
-          (name "VMM" (effects (font (size 1.27 1.27))))
+          (name "VDC" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
         )
       )
@@ -1700,6 +1700,34 @@
     )
   )
 
+  (symbol (lib_id "power:VDC") (at 104.14 40.64 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 42968c08-6948-4188-84cb-741c6b63a4b9)
+    (property "Reference" "#PWR019" (at 104.14 43.18 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "VDC" (at 104.14 35.56 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 104.14 40.64 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 104.14 40.64 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 8ddf0efb-e1ac-4c18-a5c5-ed9ac5df6090))
+    (instances
+      (project "tentacle-board"
+        (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
+          (reference "#PWR019") (unit 1)
+        )
+        (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
+          (reference "#PWR020") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:L_Ferrite") (at 143.51 93.98 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 441c9637-f10f-4d96-ae0b-244131512418)
@@ -2033,37 +2061,6 @@
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
           (reference "L7") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:VMM") (at 104.14 40.64 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid d5273805-5ea8-452e-991f-85a0601ba612)
-    (property "Reference" "#PWR028" (at 104.14 44.45 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "VMM" (at 104.14 35.56 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 104.14 40.64 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 104.14 40.64 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 787ed4bd-641a-4888-aa9f-784215f36be0))
-    (instances
-      (project "tentacle-board"
-        (path "/d454cd10-f556-44dd-adb6-83df793ddd31"
-          (reference "#PWR028") (unit 1)
-        )
-        (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "#PWR027") (unit 1)
-        )
-        (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "#PWR034") (unit 1)
         )
       )
     )

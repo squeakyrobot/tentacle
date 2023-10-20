@@ -4,4 +4,6 @@
   (lib (name "tentacle-board")(type "KiCad")(uri "${KIPRJMOD}/tentacle-board-rescue.kicad_sym")(options "")(descr ""))
   (lib (name "DRV8825PWP")(type "KiCad")(uri "${KIPRJMOD}/lib/DRV8825PWP.kicad_sym")(options "")(descr ""))
   (lib (name "UCD1E101MCL1GS")(type "Legacy")(uri "${KIPRJMOD}/lib/UCD1E101MCL1GS.lib")(options "")(descr ""))
+  (lib (name "PTS815_SJM_250_SMTR_LFS")(type "Legacy")(uri "${KIPRJMOD}/lib/PTS815_SJM_250_SMTR_LFS.lib")(options "")(descr ""))
+  (lib (name "ABM8-12.000MHZ-20-B1U-T")(type "Legacy")(uri "${KIPRJMOD}/lib/ABM8-12.000MHZ-20-B1U-T.lib")(options "")(descr ""))
 )
