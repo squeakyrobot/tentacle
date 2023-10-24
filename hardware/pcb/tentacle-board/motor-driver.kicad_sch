@@ -1217,10 +1217,10 @@
       )
       (project "tentacle-board"
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C27") (unit 1)
+          (reference "C23") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C37") (unit 1)
+          (reference "C7") (unit 1)
         )
       )
     )
@@ -1258,10 +1258,10 @@
           (reference "R9") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "R8") (unit 1)
+          (reference "R12") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "R15") (unit 1)
+          (reference "R7") (unit 1)
         )
       )
     )
@@ -1330,10 +1330,10 @@
           (reference "R8") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "R6") (unit 1)
+          (reference "R9") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "R11") (unit 1)
+          (reference "R8") (unit 1)
         )
       )
     )
@@ -1416,10 +1416,10 @@
           (reference "C24") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C21") (unit 1)
+          (reference "C24") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C31") (unit 1)
+          (reference "C9") (unit 1)
         )
       )
     )
@@ -1474,10 +1474,10 @@
       )
       (project "tentacle-board"
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C25") (unit 1)
+          (reference "C36") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C35") (unit 1)
+          (reference "C6") (unit 1)
         )
       )
     )
@@ -1514,10 +1514,10 @@
           (reference "J5") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "J5") (unit 1)
+          (reference "J4") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "J6") (unit 1)
+          (reference "J1") (unit 1)
         )
       )
       (project "dev-board"
@@ -1563,10 +1563,10 @@
           (reference "R6") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "R9") (unit 1)
+          (reference "R10") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "R14") (unit 1)
+          (reference "R6") (unit 1)
         )
       )
     )
@@ -1581,7 +1581,7 @@
     (property "Value" "DRV8825PWP" (at 82.55 105.41 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "IC_TPS61196PWPRQ1" (at 63.5 121.92 0)
+    (property "Footprint" "tentacle-board:IC_TPS61196PWPRQ1" (at 63.5 121.92 0)
       (effects (font (size 1.27 1.27)) (justify left bottom) hide)
     )
     (property "Datasheet" "" (at 76.2 90.17 0)
@@ -1647,10 +1647,10 @@
           (reference "U4") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "U4") (unit 1)
+          (reference "U2") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "U5") (unit 1)
+          (reference "U1") (unit 1)
         )
       )
     )
@@ -1691,10 +1691,10 @@
           (reference "R6") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "R7") (unit 1)
+          (reference "R3") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "R13") (unit 1)
+          (reference "R4") (unit 1)
         )
       )
     )
@@ -1780,10 +1780,10 @@
       )
       (project "tentacle-board"
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "L4") (unit 1)
+          (reference "L6") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "L8") (unit 1)
+          (reference "L4") (unit 1)
         )
       )
     )
@@ -1852,10 +1852,10 @@
           (reference "R7") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "R10") (unit 1)
+          (reference "R5") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "R12") (unit 1)
+          (reference "R1") (unit 1)
         )
       )
     )
@@ -1955,10 +1955,10 @@
       )
       (project "tentacle-board"
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "L2") (unit 1)
+          (reference "L8") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "L6") (unit 1)
+          (reference "L1") (unit 1)
         )
       )
     )
@@ -1996,10 +1996,10 @@
           (reference "C18") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C20") (unit 1)
+          (reference "C35") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C30") (unit 1)
+          (reference "C17") (unit 1)
         )
       )
     )
@@ -2057,10 +2057,10 @@
       )
       (project "tentacle-board"
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "L3") (unit 1)
+          (reference "L5") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "L7") (unit 1)
+          (reference "L2") (unit 1)
         )
       )
     )
@@ -2098,10 +2098,10 @@
           (reference "C23") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C18") (unit 1)
+          (reference "C19") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C28") (unit 1)
+          (reference "C4") (unit 1)
         )
       )
       (project "dev-board"
@@ -2144,10 +2144,10 @@
           (reference "C20") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C19") (unit 1)
+          (reference "C16") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C29") (unit 1)
+          (reference "C13") (unit 1)
         )
       )
       (project "dev-board"
@@ -2207,10 +2207,10 @@
       )
       (project "tentacle-board"
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C26") (unit 1)
+          (reference "C22") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C36") (unit 1)
+          (reference "C2") (unit 1)
         )
       )
     )
@@ -2268,10 +2268,10 @@
       )
       (project "tentacle-board"
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "L1") (unit 1)
+          (reference "L7") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "L5") (unit 1)
+          (reference "L3") (unit 1)
         )
       )
     )
@@ -2309,10 +2309,10 @@
           (reference "C20") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C22") (unit 1)
+          (reference "C18") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C32") (unit 1)
+          (reference "C3") (unit 1)
         )
       )
       (project "dev-board"
@@ -2355,10 +2355,10 @@
           (reference "C20") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C23") (unit 1)
+          (reference "C21") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C33") (unit 1)
+          (reference "C1") (unit 1)
         )
       )
       (project "dev-board"
@@ -2418,10 +2418,10 @@
       )
       (project "tentacle-board"
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/a708fbb2-70ed-4316-8106-f355b0ec665b"
-          (reference "C24") (unit 1)
+          (reference "C20") (unit 1)
         )
         (path "/d454cd10-f556-44dd-adb6-83df793ddd31/77daf5cb-ccfd-4d97-90e7-081454685c3b"
-          (reference "C34") (unit 1)
+          (reference "C5") (unit 1)
         )
       )
     )
