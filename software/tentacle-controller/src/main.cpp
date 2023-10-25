@@ -30,8 +30,8 @@ int main() {
     gpio_put(LED_PIN, 1);
 
     TentacleConfig config;
-    config.driver1Config = createMotorConfig(TMC2209_28BYJ48_64, 27, 26);
-    config.driver2Config = createMotorConfig(TMC2209_28BYJ48_64, 17, 16);
+    config.driver1Config = createMotorConfig(DRV8825_28BYJ48_64, 6, 7);
+    config.driver2Config = createMotorConfig(DRV8825_28BYJ48_64, 9, 10);
 
     TentacleController *tc = TentacleController::create(config);
 

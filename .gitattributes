@@ -4,6 +4,7 @@
 *.hmi filter=lfs diff=lfs merge=lfs -text
 *.HMI filter=lfs diff=lfs merge=lfs -text
 *.step filter=lfs diff=lfs merge=lfs -text
+*.stp filter=lfs diff=lfs merge=lfs -text
 *.stl filter=lfs diff=lfs merge=lfs -text
 *.3mf filter=lfs diff=lfs merge=lfs -text
 *.jpg filter=lfs diff=lfs merge=lfs 
@@ -25,4 +26,4 @@
 *.pro diff=lfs merge=lfs -text
 *.lib diff=lfs merge=lfs -text
 *.FCStd diff=lfs merge=lfs
-
+*.mp4 filter=lfs diff=lfs merge=lfs
