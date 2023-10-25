@@ -7,4 +7,5 @@
   (lib (name "PTS815_SJM_250_SMTR_LFS")(type "Legacy")(uri "${KIPRJMOD}/lib/PTS815_SJM_250_SMTR_LFS.lib")(options "")(descr ""))
   (lib (name "ABM8-12.000MHZ-20-B1U-T")(type "Legacy")(uri "${KIPRJMOD}/lib/ABM8-12.000MHZ-20-B1U-T.lib")(options "")(descr ""))
   (lib (name "W25Q32JVZPIQ")(type "Legacy")(uri "${KIPRJMOD}/lib/W25Q32JVZPIQ.lib")(options "")(descr ""))
+  (lib (name "TC33X-2-103E")(type "Legacy")(uri "${KIPRJMOD}/lib/TC33X-2-103E.lib")(options "")(descr ""))
 )

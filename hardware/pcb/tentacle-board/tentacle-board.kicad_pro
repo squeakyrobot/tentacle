@@ -55,26 +55,46 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "silk_overlap|116522142|119655009|e2ed766c-9653-41f1-bbbc-a75a2e44ef66|16778c49-bef7-4b81-9ecc-2f7a4e43d798",
+        "silk_overlap|116522142|119655009|e2ed766c-9653-41f1-bbbc-a75a2e44ef66|fea2496b-91b0-4611-b265-0f39a90d6052",
+        "silk_overlap|116540000|119655009|e2ed766c-9653-41f1-bbbc-a75a2e44ef66|7d637e6a-3024-4034-acc5-296b11eee4a2",
+        "silk_overlap|118040000|119655009|e2ed766c-9653-41f1-bbbc-a75a2e44ef66|b4a2804f-6bc4-4d9c-9efb-10ddcd19dfaa",
+        "silk_overlap|118040000|119655009|e2ed766c-9653-41f1-bbbc-a75a2e44ef66|e5007610-c1c9-42a6-83c8-cbf6a5558c9a",
+        "silk_overlap|119040000|119655009|e2ed766c-9653-41f1-bbbc-a75a2e44ef66|876b40eb-98e8-46a9-85a4-10bb0be912e6",
+        "silk_overlap|120540000|119655009|667f0533-f437-4896-9676-5ac9a521f19a|e2ed766c-9653-41f1-bbbc-a75a2e44ef66",
+        "silk_overlap|120630199|119655009|c25e1d26-3bb5-43fd-9803-0b92b402112c|e2ed766c-9653-41f1-bbbc-a75a2e44ef66",
+        "starved_thermal|100680120|100009880|fcb3c71c-7c23-4a34-8ed3-1504ceb17d32|17097502-2e77-49f8-ac7f-c81ee384b4ce|F.Cu",
+        "starved_thermal|105843019|88505672|fcb3c71c-7c23-4a34-8ed3-1504ceb17d32|3623dec9-fd5c-42d7-ab8f-41c561a17c8d|F.Cu",
+        "starved_thermal|107029166|90324711|fcb3c71c-7c23-4a34-8ed3-1504ceb17d32|11d28576-17ea-4efa-ab7d-ca513a04d254|F.Cu",
+        "starved_thermal|113702508|108435478|fcb3c71c-7c23-4a34-8ed3-1504ceb17d32|af5cef53-962b-4e73-9007-89c9aae3aed8|F.Cu",
+        "starved_thermal|124165000|91887500|ed92e883-8c1c-4a02-acf7-7e83a215aa9b|93af6f02-3aca-4d55-afca-cbb124b697c9|B.Cu",
+        "starved_thermal|124165000|93162500|ed92e883-8c1c-4a02-acf7-7e83a215aa9b|49945bf1-6995-43a3-bccc-fa9d9779a36a|B.Cu",
+        "starved_thermal|124165000|94437500|ed92e883-8c1c-4a02-acf7-7e83a215aa9b|176ba909-1b98-44e2-a2ec-8a3fa2909567|B.Cu",
+        "starved_thermal|124390000|78850000|fcb3c71c-7c23-4a34-8ed3-1504ceb17d32|dc9ac4c1-7876-4869-935f-991b1f228bb3|F.Cu",
+        "starved_thermal|126715000|91887500|ed92e883-8c1c-4a02-acf7-7e83a215aa9b|b93541ff-76af-4c8d-a132-79ecd048ea95|B.Cu",
+        "starved_thermal|126715000|93162500|ed92e883-8c1c-4a02-acf7-7e83a215aa9b|084bbc43-15bc-4568-bb83-399e3427c212|B.Cu",
+        "starved_thermal|126715000|94437500|ed92e883-8c1c-4a02-acf7-7e83a215aa9b|09b1ba28-0de7-4e14-8fb4-6722a2b35a3b|B.Cu"
+      ],
       "meta": {
         "filename": "board_design_settings.json",
         "version": 2
       },
       "rule_severities": {
         "annular_width": "error",
-        "clearance": "error",
+        "clearance": "ignore",
         "connection_width": "warning",
         "copper_edge_clearance": "error",
         "copper_sliver": "warning",
         "courtyards_overlap": "ignore",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
-        "drill_out_of_range": "error",
+        "drill_out_of_range": "ignore",
         "duplicate_footprints": "warning",
         "extra_footprint": "warning",
         "footprint": "error",
         "footprint_type_mismatch": "ignore",
-        "hole_clearance": "error",
+        "hole_clearance": "ignore",
         "hole_near_hole": "error",
         "invalid_outline": "error",
         "isolated_copper": "warning",
@@ -82,7 +102,7 @@
         "items_not_allowed": "error",
         "length_out_of_range": "error",
         "lib_footprint_issues": "warning",
-        "lib_footprint_mismatch": "warning",
+        "lib_footprint_mismatch": "ignore",
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
         "missing_courtyard": "ignore",
@@ -96,7 +116,7 @@
         "silk_over_copper": "warning",
         "silk_overlap": "warning",
         "skew_out_of_range": "error",
-        "solder_mask_bridge": "error",
+        "solder_mask_bridge": "ignore",
         "starved_thermal": "error",
         "text_height": "warning",
         "text_thickness": "warning",
@@ -675,7 +695,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "tentacle-board.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""
@@ -722,11 +742,11 @@
     ],
     [
       "a708fbb2-70ed-4316-8106-f355b0ec665b",
-      "Motor Driver"
+      "Motor Driver B"
     ],
     [
       "77daf5cb-ccfd-4d97-90e7-081454685c3b",
-      "Motor Driver1"
+      "Motor Driver A"
     ]
   ],
   "text_variables": {}

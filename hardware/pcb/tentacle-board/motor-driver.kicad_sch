@@ -4,6 +4,13 @@
 
   (paper "A4")
 
+  (title_block
+    (title "Tentacle Controller Board")
+    (date "2023-10-24")
+    (rev "REV1")
+    (company "Squeaky Robot")
+  )
+
   (lib_symbols
     (symbol "Connector_Generic:Conn_01x04" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "J" (at 0 5.08 0)
@@ -1613,6 +1620,15 @@
     )
     (property "AVAILABILITY" "Good" (at 63.5 132.08 0)
       (effects (font (size 1.27 1.27)) (justify left bottom) hide)
+    )
+    (property "Mfr #" "DRV8825PWPR" (at 76.2 90.17 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC #" "C81582" (at 76.2 90.17 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Mouser #" "595-DRV8825PWPR" (at 76.2 90.17 0)
+      (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 2fe1b04b-c469-4f00-a1a2-760530f7e14a))
     (pin "10" (uuid 9cf3c2d8-9547-4c48-b7af-28559695384b))
