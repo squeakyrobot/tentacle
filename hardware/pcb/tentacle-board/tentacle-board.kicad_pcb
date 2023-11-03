@@ -36,8 +36,7 @@
   )
 
   (setup
-    (pad_to_mask_clearance 0.051)
-    (solder_mask_min_width 0.09)
+    (pad_to_mask_clearance 0)
     (aux_axis_origin 100 100)
     (grid_origin 121.59 74)
     (pcbplotparams
@@ -64,15 +63,15 @@
       (psnegative false)
       (psa4output false)
       (plotreference true)
-      (plotvalue false)
+      (plotvalue true)
       (plotinvisibletext false)
       (sketchpadsonfab false)
-      (subtractmaskfromsilk true)
+      (subtractmaskfromsilk false)
       (outputformat 1)
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory "gerbers")
+      (outputdirectory "release-v1.1")
     )
   )
 

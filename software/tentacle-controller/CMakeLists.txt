@@ -12,7 +12,9 @@ if (DEFINED ENV{PICO_SDK_PATH} AND (NOT PICO_SDK_PATH))
     message("Using PICO_SDK_PATH from environment ('${PICO_SDK_PATH}')")
 endif ()
 
-set(PICO_BOARD pico CACHE STRING "Board type")
+set (PICO_BOARD_HEADER_DIRS ${CMAKE_CURRENT_LIST_DIR}/src/boards )
+
+set(PICO_BOARD tentacle-controller-board CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -56,6 +58,7 @@ target_link_libraries(tentacle-controller pico_stdlib)
 target_include_directories(tentacle-controller PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}
   ${CMAKE_CURRENT_LIST_DIR}/src 
+  ${CMAKE_CURRENT_LIST_DIR}/src/boards 
   ${CMAKE_CURRENT_LIST_DIR}/src/motor-driver
   # ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
 

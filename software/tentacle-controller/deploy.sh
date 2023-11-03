@@ -1,7 +1,7 @@
 
 cd build/
 # cmake clean
-cmake .. 
+cmake .. # -DPICO_BOARD=tentacle_controller
 # make clean
 make -j16
 

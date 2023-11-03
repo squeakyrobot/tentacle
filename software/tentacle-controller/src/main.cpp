@@ -20,27 +20,60 @@
 // 0-255
 #define SPEED 128
 
-const uint LED_PIN = PICO_DEFAULT_LED_PIN;
-
 int main() {
     stdio_init_all();
     puts("Starting");
-    gpio_init(LED_PIN);
-    gpio_set_dir(LED_PIN, GPIO_OUT);
-    gpio_put(LED_PIN, 1);
+    // gpio_init(LED_PIN);
+    // gpio_set_dir(LED_PIN, GPIO_OUT);
+    // gpio_put(LED_PIN, 1);
+
+    // Setup micro stepping
+    // TODO: wrap this into an easy to use function
+    gpio_init(M0_PIN);
+    gpio_set_dir(M0_PIN, GPIO_OUT);
+    gpio_put(M0_PIN, 0);
+
+    gpio_init(M1_PIN);
+    gpio_set_dir(M1_PIN, GPIO_OUT);
+    gpio_put(M1_PIN, 0);
+
+    gpio_init(M2_PIN);
+    gpio_set_dir(M2_PIN, GPIO_OUT);
+    gpio_put(M2_PIN, 0);
+
+    // Enable, this should not be needed
+    gpio_init(MOTOR_ENABLE_PIN);
+    gpio_set_dir(MOTOR_ENABLE_PIN, GPIO_OUT);
+    gpio_put(MOTOR_ENABLE_PIN, 0);
+
+    // Sleep, this should not be needed
+    gpio_init(MA_SLEEP_PIN);
+    gpio_set_dir(MA_SLEEP_PIN, GPIO_OUT);
+    gpio_put(MA_SLEEP_PIN, 1);
+
+    gpio_init(MB_SLEEP_PIN);
+    gpio_set_dir(MB_SLEEP_PIN, GPIO_OUT);
+    gpio_put(MB_SLEEP_PIN, 1);
+
+    // Reset
+    gpio_init(MA_RESET_PIN);
+    gpio_set_dir(MA_RESET_PIN, GPIO_OUT);
+    gpio_put(MA_RESET_PIN, 1);
+
+    gpio_init(MB_RESET_PIN);
+    gpio_set_dir(MB_RESET_PIN, GPIO_OUT);
+    gpio_put(MB_RESET_PIN, 1);
 
     TentacleConfig config;
-    config.driver1Config = createMotorConfig(DRV8825_28BYJ48_64, 6, 7);
-    config.driver2Config = createMotorConfig(DRV8825_28BYJ48_64, 9, 10);
+    // config.driver1Config = createMotorConfig(DRV8825_28BYJ48_64, 6, 7);
+    // config.driver2Config = createMotorConfig(DRV8825_28BYJ48_64, 9, 10);
+
+    config.driver1Config = createMotorConfig(DRV8825_28BYJ48_16, MA_STEP_PIN, MA_DIR_PIN);
+    config.driver2Config = createMotorConfig(DRV8825_28BYJ48_16, MB_STEP_PIN, MB_DIR_PIN);
 
     TentacleController *tc = TentacleController::create(config);
 
-    // StepperDriver *driver1 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_16, 17, 16));
-    // StepperDriver *driver2 = new TimerStepperDriver(createMotorConfig(TMC2209_28BYJ48_16, 27, 26));
-    tc->setSpeed(128);
-
-    sleep_ms(1072);
-    gpio_put(LED_PIN, 0);
+    tc->setSpeed(220);
 
     tc->moveTo(20, 0);
     while (tc->getStatus() == Moving) {
@@ -109,6 +142,6 @@ int main() {
             sleep_ms(500);
         }
 
-        sleep_ms(20000);
+        sleep_ms(10000);
     }
 }

@@ -1,0 +1,79 @@
+G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,7.0.8-7.0.8~ubuntu22.04.1*
+G04 #@! TF.CreationDate,2023-11-03T11:59:51-07:00*
+G04 #@! TF.ProjectId,tentacle-board,74656e74-6163-46c6-952d-626f6172642e,REV1*
+G04 #@! TF.SameCoordinates,Original*
+G04 #@! TF.FileFunction,Soldermask,Bot*
+G04 #@! TF.FilePolarity,Negative*
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 7.0.8-7.0.8~ubuntu22.04.1) date 2023-11-03 11:59:51*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+G04 Aperture macros list*
+%AMRoundRect*
+0 Rectangle with rounded corners*
+0 $1 Rounding radius*
+0 $2 $3 $4 $5 $6 $7 $8 $9 X,Y pos of 4 corners*
+0 Add a 4 corners polygon primitive as box body*
+4,1,4,$2,$3,$4,$5,$6,$7,$8,$9,$2,$3,0*
+0 Add four circle primitives for the rounded corners*
+1,1,$1+$1,$2,$3*
+1,1,$1+$1,$4,$5*
+1,1,$1+$1,$6,$7*
+1,1,$1+$1,$8,$9*
+0 Add four rect primitives between the rounded corners*
+20,1,$1+$1,$2,$3,$4,$5,0*
+20,1,$1+$1,$4,$5,$6,$7,0*
+20,1,$1+$1,$6,$7,$8,$9,0*
+20,1,$1+$1,$8,$9,$2,$3,0*%
+%AMHorizOval*
+0 Thick line with rounded ends*
+0 $1 width*
+0 $2 $3 position (X,Y) of the first rounded end (center of the circle)*
+0 $4 $5 position (X,Y) of the second rounded end (center of the circle)*
+0 Add line between two ends*
+20,1,$1,$2,$3,$4,$5,0*
+0 Add two circle primitives to create the rounded ends*
+1,1,$1,$2,$3*
+1,1,$1,$4,$5*%
+G04 Aperture macros list end*
+%ADD10C,2.600000*%
+%ADD11C,3.500000*%
+%ADD12RoundRect,0.250000X0.936916X0.088388X0.088388X0.936916X-0.936916X-0.088388X-0.088388X-0.936916X0*%
+%ADD13HorizOval,1.700000X0.088388X0.088388X-0.088388X-0.088388X0*%
+%ADD14RoundRect,0.250000X0.088388X-0.936916X0.936916X-0.088388X-0.088388X0.936916X-0.936916X0.088388X0*%
+%ADD15HorizOval,1.700000X-0.088388X0.088388X0.088388X-0.088388X0*%
+%ADD16RoundRect,0.250000X0.600000X0.750000X-0.600000X0.750000X-0.600000X-0.750000X0.600000X-0.750000X0*%
+%ADD17O,1.700000X2.000000*%
+G04 APERTURE END LIST*
+D10*
+X128040000Y-116550000D03*
+D11*
+X128040000Y-116550000D03*
+D10*
+X95390000Y-89900000D03*
+D11*
+X95390000Y-89900000D03*
+D10*
+X128040000Y-70750000D03*
+D11*
+X128040000Y-70750000D03*
+D12*
+X105119999Y-112421793D03*
+D13*
+X103352232Y-110654026D03*
+X101584465Y-108886259D03*
+X99816698Y-107118492D03*
+D14*
+X100081859Y-79841859D03*
+D15*
+X101849626Y-78074092D03*
+X103617393Y-76306325D03*
+X105385160Y-74538558D03*
+D16*
+X119790000Y-117150000D03*
+D17*
+X117290000Y-117150000D03*
+M02*
