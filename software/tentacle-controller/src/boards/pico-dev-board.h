@@ -9,13 +9,55 @@
 //       SHOULD ONLY CONSIST OF PREPROCESSOR DIRECTIVES
 // -----------------------------------------------------
 
-// This header may be included by other board headers as "boards/pico.h"
-
-#ifndef _BOARDS_PICO_H
-#define _BOARDS_PICO_H
+#ifndef _BOARDS_PICO_DEV_BOARD_H
+#define _BOARDS_PICO_DEV_BOARD_H
 
 // For board detection
-#define RASPBERRYPI_PICO
+#define PICO_DEV_BOARD
+
+// TENTACLE CONTROLLER PIN CONFIGURATION
+// --------------------------------------
+
+#define MODE0_PIN 2
+#define MODE1_PIN 3
+#define MODE2_PIN 4
+
+// Not present on dev board
+// #define MOTOR_ENABLE_PIN 5
+
+#define MOTOR_A_DIR_PIN 7
+#define MOTOR_A_STEP_PIN 6
+#define MOTOR_A_SLEEP_PIN 8
+
+// Not present on dev board
+// #define MOTOR_A_RESET_PIN 9
+// #define MOTOR_A_HOME_PIN 0
+// #define MOTOR_A_FAULT_PIN 7
+
+#define MOTOR_1_DIR_PIN MOTOR_A_DIR_PIN
+#define MOTOR_1_STEP_PIN MOTOR_A_STEP_PIN
+#define MOTOR_1_SLEEP_PIN MOTOR_A_SLEEP_PIN
+
+#define MOTOR_B_DIR_PIN 10
+#define MOTOR_B_STEP_PIN 9
+#define MOTOR_B_SLEEP_PIN 8
+
+// Not present on dev board
+// #define MOTOR_B_RESET_PIN 15
+// #define MOTOR_B_HOME_PIN 10
+// #define MOTOR_B_FAULT_PIN 13
+
+#define MOTOR_2_DIR_PIN MOTOR_B_DIR_PIN
+#define MOTOR_2_STEP_PIN MOTOR_B_STEP_PIN
+#define MOTOR_2_SLEEP_PIN MOTOR_B_SLEEP_PIN
+
+#define MOTOR_3_DIR_PIN 13
+#define MOTOR_3_STEP_PIN 12
+#define MOTOR_3_SLEEP_PIN 11
+
+#define MOTOR_4_DIR_PIN 16
+#define MOTOR_4_STEP_PIN 15
+#define MOTOR_4_SLEEP_PIN 14
 
 // --- UART ---
 #ifndef PICO_DEFAULT_UART

@@ -18,25 +18,25 @@
 // TENTACLE CONTROLLER PIN CONFIGURATION
 // --------------------------------------
 
-#define M0_PIN 3
-#define M1_PIN 2
-#define M2_PIN 1
+#define MODE0_PIN 3
+#define MODE1_PIN 2
+#define MODE2_PIN 1
 
 #define MOTOR_ENABLE_PIN 5
 
-#define MA_DIR_PIN 6
-#define MA_STEP_PIN 4
-#define MA_SLEEP_PIN 8
-#define MA_RESET_PIN 9
-#define MA_HOME_PIN 0
-#define MA_FAULT_PIN 7
+#define MOTOR_A_DIR_PIN 6
+#define MOTOR_A_STEP_PIN 4
+#define MOTOR_A_SLEEP_PIN 8
+#define MOTOR_A_RESET_PIN 9
+#define MOTOR_A_HOME_PIN 0
+#define MOTOR_A_FAULT_PIN 7
 
-#define MB_DIR_PIN 12
-#define MB_STEP_PIN 11
-#define MB_SLEEP_PIN 14
-#define MB_RESET_PIN 15
-#define MB_HOME_PIN 10
-#define MB_FAULT_PIN 13
+#define MOTOR_B_DIR_PIN 12
+#define MOTOR_B_STEP_PIN 11
+#define MOTOR_B_SLEEP_PIN 14
+#define MOTOR_B_RESET_PIN 15
+#define MOTOR_B_HOME_PIN 10
+#define MOTOR_B_FAULT_PIN 13
 
 // --- UART ---
 #ifndef PICO_DEFAULT_UART
