@@ -65,8 +65,8 @@ int main() {
     // config.driver1Config = createMotorConfig(DRV8825_28BYJ48_64, 6, 7);
     // config.driver2Config = createMotorConfig(DRV8825_28BYJ48_64, 9, 10);
 
-    config.driver1Config = createMotorConfig(DRV8825_28BYJ48_16, MOTOR_A_STEP_PIN, MOTOR_A_DIR_PIN);
-    config.driver2Config = createMotorConfig(DRV8825_28BYJ48_16, MOTOR_B_STEP_PIN, MOTOR_B_DIR_PIN);
+    config.driver1Config = createMotorConfig(DRV8825_28BYJ48_64, MOTOR_A_STEP_PIN, MOTOR_A_DIR_PIN);
+    config.driver2Config = createMotorConfig(DRV8825_28BYJ48_64, MOTOR_B_STEP_PIN, MOTOR_B_DIR_PIN);
 
     TentacleController *tc = TentacleController::create(config);
 
