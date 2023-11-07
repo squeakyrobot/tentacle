@@ -28,7 +28,7 @@ int main() {
     // TODO: wrap this into an easy to use function
     gpio_init(MODE0_PIN);
     gpio_set_dir(MODE0_PIN, GPIO_OUT);
-    gpio_put(MODE0_PIN, 0);
+    gpio_put(MODE0_PIN, 1);
 
     gpio_init(MODE1_PIN);
     gpio_set_dir(MODE1_PIN, GPIO_OUT);
@@ -65,8 +65,8 @@ int main() {
     // config.driver1Config = createMotorConfig(DRV8825_28BYJ48_64, 6, 7);
     // config.driver2Config = createMotorConfig(DRV8825_28BYJ48_64, 9, 10);
 
-    config.driver1Config = createMotorConfig(DRV8825_28BYJ48_64, MOTOR_A_STEP_PIN, MOTOR_A_DIR_PIN);
-    config.driver2Config = createMotorConfig(DRV8825_28BYJ48_64, MOTOR_B_STEP_PIN, MOTOR_B_DIR_PIN);
+    config.driver1Config = createMotorConfig(DRV8825_NEMA11, MOTOR_A_STEP_PIN, MOTOR_A_DIR_PIN, MOTOR_A_SLEEP_PIN);
+    config.driver2Config = createMotorConfig(DRV8825_NEMA11, MOTOR_B_STEP_PIN, MOTOR_B_DIR_PIN, MOTOR_B_SLEEP_PIN);
 
     TentacleController *tc = TentacleController::create(config);
 

@@ -12,6 +12,7 @@
 const StepperDriverConfig TMC2209_28BYJ48_64 = {
     directionPin : 0,
     stepPin : 0,
+    sleepPin : 0,
     stepsPerRevolution : 2052,  // 2038???
     microStepMultiplier : 8,
     invertDirection : true,
@@ -25,6 +26,7 @@ const StepperDriverConfig TMC2209_28BYJ48_64 = {
 const StepperDriverConfig TMC2209_28BYJ48_16 = {
     directionPin : 0,
     stepPin : 0,
+    sleepPin : 0,
     stepsPerRevolution : 516,
     microStepMultiplier : 8,
     invertDirection : true,
@@ -37,6 +39,7 @@ const StepperDriverConfig TMC2209_28BYJ48_16 = {
 const StepperDriverConfig DRV8825_28BYJ48_64 = {
     directionPin : 0,
     stepPin : 0,
+    sleepPin : 0,
     stepsPerRevolution : 2052,  // 2052,  // 2038???
     microStepMultiplier : 1,
     invertDirection : false,
@@ -46,10 +49,21 @@ const StepperDriverConfig DRV8825_28BYJ48_64 = {
 const StepperDriverConfig DRV8825_28BYJ48_16 = {
     directionPin : 0,
     stepPin : 0,
+    sleepPin : 0,
     stepsPerRevolution : 516,
     microStepMultiplier : 1,
     invertDirection : false,
     maxRPM : 25
+};
+
+const StepperDriverConfig DRV8825_NEMA11 = {
+    directionPin : 0,
+    stepPin : 0,
+    sleepPin : 0,
+    stepsPerRevolution : 200,
+    microStepMultiplier : 2,
+    invertDirection : false,
+    maxRPM : 60
 };
 
 /**
@@ -58,6 +72,7 @@ const StepperDriverConfig DRV8825_28BYJ48_16 = {
 const StepperDriverConfig TMC2209_NEMA8 = {
     directionPin : 0,
     stepPin : 0,
+    sleepPin : 0,
     stepsPerRevolution : 200,
     microStepMultiplier : 8,
     invertDirection : true,
@@ -65,6 +80,6 @@ const StepperDriverConfig TMC2209_NEMA8 = {
 };
 
 // TODO: add type
-StepperDriverConfig createMotorConfig(StepperDriverConfig config, uint8_t stepPin, uint8_t directionPin);
+StepperDriverConfig createMotorConfig(StepperDriverConfig config, uint8_t stepPin, uint8_t directionPin, uint8_t sleepPin);
 
 #endif

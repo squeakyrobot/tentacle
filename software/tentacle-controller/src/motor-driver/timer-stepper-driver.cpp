@@ -6,6 +6,13 @@ TimerStepperDriver::TimerStepperDriver(StepperDriverConfig config) : StepperDriv
     gpio_set_dir(config.stepPin, GPIO_OUT);
     gpio_set_dir(config.directionPin, GPIO_OUT);
     gpio_put(config.directionPin, (this->config.invertDirection) ? !Clockwise : Clockwise);
+
+    if (config.sleepOnStop == true) {
+        gpio_init(config.sleepPin);
+        gpio_set_dir(config.sleepPin, GPIO_OUT);
+        gpio_put(config.sleepPin, 0);
+    }
+
     this->stepsFromHome = 0;
 };
 
@@ -16,6 +23,11 @@ TimerStepperDriver::~TimerStepperDriver() {
 bool TimerStepperDriver::rotateSteps(uint8_t speed, uint32_t steps, RotationDirection direction) {
     if (steps == 0) {
         return true;
+    }
+
+    if (config.sleepOnStop == true) {
+        gpio_put(config.sleepPin, 1);
+        // sleep_ms(10);
     }
 
     puts("Timer Rotate Steps");
@@ -45,6 +57,11 @@ bool TimerStepperDriver::rotateSteps(uint8_t speed, uint32_t steps, RotationDire
 
 bool TimerStepperDriver::stop() {
     this->status = Stopped;
+
+    if (config.sleepOnStop == true) {
+        gpio_put(config.sleepPin, 0);
+    }
+
     return cancel_repeating_timer(&this->timer);
 };
 

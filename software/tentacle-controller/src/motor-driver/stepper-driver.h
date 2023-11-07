@@ -12,9 +12,11 @@ enum StepperDriverType {
 typedef struct {
     uint8_t directionPin;
     uint8_t stepPin;
+    uint8_t sleepPin;
     uint16_t stepsPerRevolution;
     uint16_t microStepMultiplier = 1;
     bool invertDirection = false;
+    bool sleepOnStop = true;
     float maxRPM;
     StepperDriverType driverType = TimerDriver;
 } StepperDriverConfig;

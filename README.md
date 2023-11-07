@@ -4,6 +4,10 @@ Modular robotic tentacle
 TODO: On the project webpage add a simple calculator to help with the tentacle setup that allows the user to
 easily configure their tentacle. Also add the maths in this document
 
+## BOM
+
+ * Internal Bearings - [F683ZZ](https://www.amazon.com/gp/product/B07Z3DRZX9)
+ * Pulley Bearings - [6700-2RS](https://www.amazon.com/gp/product/B082PR3DFZ)
 
 ## Motor Options
 

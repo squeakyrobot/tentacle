@@ -116,7 +116,15 @@ All motor connectors map to the same pins of their corresponding DRV8825 modules
  * **NOT COMPLETE**
  * Fix issue with missing silkscreen items
 
+
+ 
+
 ## TODO:
 
  * Investigate alternative motor connectors
+    - Change to JST-PH 2mm
  * Investigate alternative power connector
+ * Switch interface connectors to right angle
+ * Switch to a shared SLEEP and individual ENABLE
+ * Add software configurable VREF, perhaps have the pot be the max
+ * Make CTRL & AUX connectors 90 degrees
